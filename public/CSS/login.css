@@ -1,0 +1,138 @@
+body{
+    background: url(/IMG/logo.png) no-repeat left 20% top 35% fixed,
+                url(/IMG/vols.png) no-repeat left 8% bottom -20px fixed,
+                url(/IMG/sky.jpg) no-repeat left bottom fixed;
+    background-size: 30%, 45%, cover;
+}
+
+.lgininBox{
+  position: absolute;
+  width: 57%;
+  right: 0;
+  top: 15%;
+}
+
+form{
+  margin: 40px auto;
+  background-color: #eeeeee97 ;
+  width: 400px;
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  filter:  drop-shadow(4px -4px 6px rgba(0, 0, 0, 0.164));
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.hidden{
+  display: none;
+}
+
+.title{
+  font-size: 26px;
+  background: linear-gradient(to left top, #3a1c71, #42752f, #bfd250);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: 10px auto;
+}
+
+label{
+  vertical-align: middle;
+  font-size: 20px;
+  color: #666666;
+  margin-right: 12px;
+}
+
+input{
+  margin: 10px 0;
+  padding: 10px;
+  vertical-align: middle;
+  box-shadow: inset 1px 2px 2px  rgb(200, 200, 200);
+  font-size: 18px;
+}
+
+button {
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius:5px;
+  border-width:0px ;
+  text-shadow: 0.5px 0.5px 0.5px #bcbcbc;
+  box-shadow: 1px 2px 1px rgb(200, 200, 200);
+  color: #666666;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  background: #f3f6f4;
+  padding: 6px 20px;
+  margin: 15px auto;
+}
+
+button:hover {
+  cursor: pointer;
+  background: #eff4f3;
+}
+
+@media(max-width:950px){
+  body{
+    background-size: 320px, 45%, cover;
+  }
+  form{
+    width: 330px;
+    margin: 30px auto;
+    padding: 10px;
+  }
+}
+
+
+@media(max-width:920px){
+  body{
+    background: url(/IMG/logo.png) no-repeat center top 30px fixed,
+                url(/IMG/vols.png) no-repeat left bottom -10% fixed,
+                url(/IMG/sky.jpg) no-repeat left 10% bottom fixed;
+    background-size: 330px, 50%, cover;
+  }
+
+  .lgininBox{
+    position: absolute;
+    margin: 10px auto;
+    top: 90px;
+    right: 50%;
+    transform: translate(50%);
+  }
+}
+
+@media(max-width:620px){
+  .lgininBox{
+    width: 70%;
+  }
+}
+
+@media(max-width:500px){
+  body{
+    background: url(/IMG/logo.png) no-repeat center top 30px fixed,
+                url(/IMG/vols.png) no-repeat center bottom fixed,
+                url(/IMG/sky.jpg) no-repeat left 10% bottom fixed;
+    background-size: 330px, 80%, cover;
+  }
+  .lgininBox{
+    width: 80%;
+  }
+
+  form{
+    width: 280px;
+  }
+
+  input{
+    width: 180px;
+    font-size: 16px;
+  }
+}
+
+@media(max-width:400px){
+  .lgininBox{
+    width: 90%;
+  }
+}
+
+
