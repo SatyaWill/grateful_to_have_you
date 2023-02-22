@@ -1,7 +1,7 @@
 'use strict'
 const router = require('express').Router()
 const authMiddleware = require("../middlewares/auth")
-const authController = require("../controllers/auth")
+const authController = require("../controllers/auth.c")
 
 
 router.put("/", authController.login)

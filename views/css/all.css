@@ -12,6 +12,11 @@
     box-sizing: border-box;
 }
 
+a {
+    color: #33467c;
+    text-decoration: none;
+}
+
 body{
     margin:0 auto;
     font-family: 'Microsoft JhengHei', sans-serif !important;
@@ -25,7 +30,11 @@ button, input{
 }
 
 input[disabled], button[disabled]{
-    cursor: not-allowed;
+    cursor: not-allowed !important;
+}
+
+*:disabled{
+    cursor: not-allowed !important;
 }
   
 input, button:focus{
@@ -37,7 +46,7 @@ input, button:focus{
 }
 
 .nav{
-    background: url(/IMG/nav_banner2.jpg) no-repeat left top;
+    background: url(/img/nav_banner2.jpg) no-repeat left top;
     background-size: cover;
     width: 100%;
     height: var(--nav-height);
@@ -54,13 +63,14 @@ input, button:focus{
 }
 
 .logo{
-    background: url(/IMG/nav_ico.png) no-repeat left center;
+    cursor: pointer;
+    background: url(/img/nav_ico.png) no-repeat left center;
     background-size: contain;
     width: var(--nav-height);
     height: var(--nav-height);
     margin-right: 3px;
 }
-  
+ 
 .nav_left, .nav_right  {
     display: flex;
     position: relative;
@@ -120,24 +130,6 @@ h6:hover, h6:active, .h6Active{
 .nav_item:hover,.nav_board_item:hover, .itemActive{
     box-shadow: 0px 2px 0px rgba(248, 152, 100, 0.808);
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%,rgba(252, 246, 205, 0.653) 70%);
-}
-
-.f14cm{
-    font-size: 14px;
-    text-align: center;
-    justify-content: center;
-    vertical-align: middle;
-}
-
-.f14cml{
-    font-size: 14px;
-    text-align: left;
-    justify-content: center;
-    vertical-align: middle;
-}
-
-.th-sm{
-    text-align: center;
 }
 
 @media(max-width:1200px){

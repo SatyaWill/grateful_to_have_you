@@ -10,8 +10,8 @@ module.exports = {
         try {
             const { id , password } = req.body
             const resp = await authModel.password(id)
-            if (!bcrypt.compareSync(password, resp)) return errInfo(res, 422, 'Invalid credentials')
-            const user = { id: id }
+            if (!bcrypt.compareSync(password, resp.password)) return errInfo(res, 422, 'Invalid credentials')
+            const user = { id: id, authId: resp.authId }
             tokenList.push(refresh(user))
             const accessToken = access(user)
             const refreshToken = refresh(user)
@@ -32,7 +32,7 @@ module.exports = {
         
             jwt.verify(refreshToken, process.env.REFRESH_JWT, (err, user) => {
             if (err) return errInfo(res, 403, 'token錯誤')
-            const accessToken = access({id: user.id})
+            const accessToken = access({id: user.id, authId: user.authId})
             return res.status(200).json({message:"ok", accessToken: accessToken})
             })
         }catch(e) {

@@ -1,0 +1,251 @@
+body{
+    background-color: #f5f5f5;
+}
+main{
+    width: 95%;
+    margin: 20px auto;
+}
+
+#n_newVol{
+    cursor: pointer;
+    background: linear-gradient(to top, #528138, #689044, #9bbb6c);
+    margin-left: 0px !important;
+    margin-bottom: 10px;
+    float: left;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.accordion-item {
+    clear: both;
+    box-shadow: 0px 2px 3px rgba(199, 196, 193, 0.979);
+    margin-bottom: 15px;
+}
+
+.accordion-button{
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #e7f1ff;
+    color: #3d6578 !important;
+}
+
+.accordion-button:focus{
+    box-shadow: 0px 2px 3px rgba(199, 196, 193, 0.979);
+}
+
+.accordion-button::after {
+    width: 1rem;
+    height: 1rem;
+    background-size: 1rem;
+}
+
+
+.accordion-body{
+    text-align: left;
+}
+
+Form{
+    font-size: 14px;
+}
+
+Form input:not([type="checkbox"],[type="radio"]), select{
+    height: 25px;
+    width: 100px;
+    font-size: 13px;
+    padding: 2px 8px;
+}
+
+Form input[type="text"], Form input[type="date"], select{
+    margin-right: 3px;
+}
+
+Form .badge{
+    font-size: 1em !important;
+    padding: 8px 10px !important;
+}
+
+#isubmit{
+    margin-left: 64px;
+}
+
+#iclear, #iexcel{
+    margin-left: 5px;
+}
+
+#addVols:hover, button:hover{
+    box-shadow: 0px 2px 3px rgba(152, 148, 145, 0.964) !important;
+}
+
+.infoDesc{
+    text-align: left;
+    background-color: #fff6da;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #e0e0e0;
+    color: brown;
+    font-weight: bold;
+    text-align: justify;
+}
+
+.intoGroupLabel{
+    width: 90px;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+/*新增志工區*/
+.volBox{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.volInfo{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    border: 0;
+    border-radius: 5;
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #e7f1ff;
+    color: #3d6578;
+}
+
+.need{
+    color: #b05307;
+}
+
+.line-dashed{
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #cbd1d5;
+}
+
+.vol2Box{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.vol2BoxL{
+    width: 650px;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.vol2BoxL1{
+    width: 320px;
+    flex: none;
+}
+
+.vol2BoxL2{
+    width: 300px;
+    padding-top: 35px;
+    flex: none;
+    align-items: center;
+}
+
+.vol2BoxI{
+    align-items: center;
+}
+
+
+#v_address{
+    width: 246px;
+}
+
+#picPreview{
+    height:120px;
+    width: 90px;
+    border-style: dashed;
+    background:url('/img/headshot.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.bookFile, .noteBox{
+    display: flex;
+    width: 320px;
+}
+#v_book_picUrl{
+    font-size: 12px;
+    margin-top: 2px;
+    margin-left: 66px;
+    width: 200px;
+}
+
+.groupTitle{
+    width: 68px;
+    text-align: right;
+    margin-right: 6px;
+}
+.vGroupLabel{
+    width:80px;
+    margin-top: 5px;
+}
+
+.vGroupInput{
+    margin-top: 8.5px;
+}
+
+.vGroup{
+    width: 620px;
+    margin-top: 6px;
+}
+
+.vGroup input:disabled{
+    background-color:  #d4d8df;
+}
+
+@media(max-width:1050px){
+    .volBox{
+        width: 100%;
+    }
+    .vol2BoxL{
+        margin-right: -20px;
+    }
+}
+
+
+@media(max-width:800px){
+    .vol2BoxL1,.vol2BoxL2{
+        flex-wrap: wrap;
+    }
+    .vol2BoxL{
+        width: 350px;
+        margin-right: 0;
+    }
+    .vol2BoxL2{
+        width: 320px;
+        padding-top: 0;
+    }
+    .rwdLeft{
+        width:64px;
+    }
+    .vol2BoxR{
+        margin-top: 10px;
+    }
+}
+
+@media(max-width:400px){
+    .vol2BoxI{
+        width: 220px;
+        flex-wrap: wrap;
+    }
+    .vol2BoxIa{
+        width: 280px;
+    }
+    .rwdLeft-m{
+        width:64px;
+    }
+    #v_address{
+        width: 200px !important;
+    }
+    .groupTitle{
+        text-align: left;
+    }
+}
