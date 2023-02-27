@@ -2,7 +2,6 @@ const joi = require("joi");
 const moment = require('moment')
 const maxNum = (moment().year() - 1911)*1000 + 999
 const RE = {
-    vol_id: /^[01][0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/,
     name: /^[^\s]{2,30}$/,
     gender: /^(男|女)$/,
     id: /^[A-Z][1-2]\d{8}$/,
@@ -11,6 +10,8 @@ const RE = {
     education: /^(01|02|03|05|07|99)$/,
     bit: /^(0|1)$/,
     status: /^(Y|N|D)$/,
+    status2: /^(Y|N)$/,
+    time: /^(?:[0-9]|[01][0-9]|2[0-3])(?:[0-5][0-9])$/
 }
 
 module.exports = {
@@ -84,6 +85,26 @@ module.exports = {
             rmLeader: joi.array().items(joi.string()).default([]), 
             rmVice: joi.array().items(joi.string()).default([]),
           })
+          return schema.validate(data);
+    },
+    newCriteria(data){
+        const schema = joi.object({
+            name: joi.string().max(20).required(),
+            group_id: joi.string().required(),
+            subgroup: joi.string().allow(""),
+            start_time: joi.string().regex(RE.time).required(),
+            end_time: joi.string().regex(RE.time).required(),
+          })   
+          return schema.validate(data);
+    },
+    editCriteria(data){
+        const schema = joi.object({
+            id: joi.string().required(),
+            name: joi.string().max(20).required(),
+            start_time: joi.string().regex(RE.time).required(),
+            end_time: joi.string().regex(RE.time).required(),
+            is_active: joi.string().regex(RE.status2).required(),
+          })   
           return schema.validate(data);
     },
 }

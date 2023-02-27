@@ -16,55 +16,6 @@ main{
     font-size: 14px;
 }
 
-.accordion-item {
-    clear: both;
-    box-shadow: 0px 2px 3px rgba(199, 196, 193, 0.979);
-    margin-bottom: 15px;
-}
-
-.accordion-button{
-    padding: 5px 10px;
-    font-size: 15px;
-    font-weight: bold;
-    background-color: #e7f1ff;
-    color: #3d6578 !important;
-}
-
-.accordion-button:focus{
-    box-shadow: 0px 2px 3px rgba(199, 196, 193, 0.979);
-}
-
-.accordion-button::after {
-    width: 1rem;
-    height: 1rem;
-    background-size: 1rem;
-}
-
-
-.accordion-body{
-    text-align: left;
-}
-
-Form{
-    font-size: 14px;
-}
-
-Form input:not([type="checkbox"],[type="radio"]), select{
-    height: 25px;
-    width: 100px;
-    font-size: 13px;
-    padding: 2px 8px;
-}
-
-Form input[type="text"], Form input[type="date"], select{
-    margin-right: 3px;
-}
-
-Form .badge{
-    font-size: 1em !important;
-    padding: 8px 10px !important;
-}
-
 #isubmit{
     margin-left: 64px;
 }
@@ -77,24 +28,42 @@ Form .badge{
     box-shadow: 0px 2px 3px rgba(152, 148, 145, 0.964) !important;
 }
 
-.infoDesc{
-    text-align: left;
-    background-color: #fff6da;
-    padding: 5px 10px;
+/* = form ========================================= */
+Form{
     font-size: 14px;
-    border-bottom: 1px solid #e0e0e0;
-    color: brown;
-    font-weight: bold;
-    text-align: justify;
+}
+Form input:not([type="checkbox"],[type="radio"]), select{
+    height: 25px;
+    width: 100px;
+    font-size: 13px;
+    padding: 2px 8px;
+}
+Form input[type="text"], Form input[type="date"], select{
+    margin-right: 3px;
+}
+Form .badge{
+    font-size: 1em !important;
+    padding: 8px 10px !important;
+}
+input:not([readonly]):focus, select:focus{
+    box-shadow: 0px 0px 3px 1px #b2b7b7e4 !important;
+    border: #b2b7b7e4 !important;
+}
+select:hover{
+    cursor: pointer;
+}
+::selection{  /* 反選 */
+    background: rgb(253, 236, 236) !important;
+}
+.select-checkbox::before,.select-checkbox::after{
+    top: 42% !important;
+}
+.select-checkbox::after{
+    font-size: 16px !important;
+    margin-top: -12px !important;
 }
 
-.intoGroupLabel{
-    width: 90px;
-    text-align: left;
-    margin-bottom: 10px;
-}
-
-/*新增志工區*/
+/* = 新增志工區 =============================== */
 .volBox{
     width: 1000px;
     margin: 0 auto;

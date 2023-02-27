@@ -1,0 +1,71 @@
+{{css "/css/info.css,/css/audit.css"}}
+
+<div class="accordion-item">
+    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+        <i class="bi bi-gear"></i>
+        標準設定
+    </button>
+    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+        <div class="infoDesc">
+            <i class="bi bi-arrow-down-square"></i>此為志工時數計算的依據。預設「起訖時間相減，以0.5小時(± 15分鐘)為單位」。           
+        </div>
+        <div class="accordion-body" id="">
+            <!-- 表格 -->
+            <table id="hoursCriteria" class="table table-bordered table-striped nowrap dt-responsive collapsed table-hover custom-tb" 
+            role="grid" aria-controls="hoursCriteria" style="width:100%">
+              <thead class="bg-light bg-gradient">
+                <tr>
+                    <th class="th-sm">操作</th>
+                    <th class="th-sm"></th>
+                    <th class="th-sm">id</th>
+                    <th class="th-sm">組別</th>
+                    <th class="th-sm">名稱</th>
+                    <th class="th-sm">起訖時間</th>
+                    <th class="th-sm">使用狀態</th>
+                    <th class="th-sm">編輯者</th>
+                    <th class="th-sm">編輯日期</th>               
+                </tr>
+              </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="accordion-item">
+    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
+        <i class="bi bi-clipboard-check"></i>
+        時數審核
+    </button>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+        <div class="accordion-body" id="">
+            <!-- 選單 -->
+            <!-- <div class="input-group audit_selector">
+                <select class="form-select groupSelector" aria-label="Example select with button addon">
+                </select>
+                <button class="btn btn-secondary" type="button">新增標準</button>
+            </div> -->
+            <div class="btn-group" id="audit_group">
+            </div>
+            <table id="hoursAudit" class="table table-bordered table-striped nowrap dt-responsive collapsed table-hover custom-tb" 
+            role="grid" aria-controls="hoursAudit" style="width:100%">
+              <thead class="bg-light bg-gradient">
+                <tr>
+                    <th class="th-sm"></th>
+                    <th class="th-sm"></th>
+                    <th class="th-sm">簽到編號</th>
+                    <th class="th-sm">志工編號</th>
+                    <th class="th-sm">姓名</th>
+                    <th class="th-sm">日期</th>
+                    <th class="th-sm">起時</th>
+                    <th class="th-sm">訖時</th>
+                    <th class="th-sm">標準</th>
+                    <th class="th-sm">計算時數</th>
+                    <th class="th-sm">審核時數</th>
+                    <th class="th-sm">備註</th>    
+                </tr>
+              </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+{{js "/js/hours/criteria.js,/js/hours/audit.js"}}

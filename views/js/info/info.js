@@ -50,7 +50,7 @@ qO("#iYearS, #iYearE, #iAgeS, #iAgeE").forEach(e=>{
 })
 
 i("n_newVol").addEventListener("click", function() {
-  window.open("/admin/newVol")
+  window.open("/admin/info/newVol")
 })
 
 i("iclear").addEventListener("click", function() {
@@ -113,7 +113,17 @@ const infoTable= $('#searchResult').dataTable({
           contentType : "application/json; charset=utf-8",
           Accept: "application/json",
           Authorization: `Bearer ${window.localStorage.getItem("accessToken")}`,
-      }
+      },
+      dataSrc: function (json) {
+        oldData = json.data;
+        return json.data;
+      },
+      error: function (xhr, error, thrown) {
+        if (xhr.status === 401) {
+            const originalRequest = xhr.config;
+            return refreshToken(originalRequest);
+        }
+    }
   },
   ordering: false,
   dom:
@@ -177,22 +187,19 @@ const infoTable= $('#searchResult').dataTable({
     },
     { data: "status", className: "f14cm" },
     // { data: "policy", title:"保險狀態<br/>結束日", className: "f14cm"},
-    { data: "policy", 
+    { data: "policy_end_date", 
       title:"保險狀態<br/>結束日",
       className: "f14cm",
       render: function (data, type) {
-        if (data.length===3) {
-          const status=data
-          const color = status === "未到期" ? 'green' : 'brown'
-          return `<span style="color:${color}">${status}</span>`
-        }
-        if (data.length>3) {
-          const status = data.split(",")[0]
-          const color = status === "未到期" ? 'green' : 'brown'
-          const policyDate = data.split(",")[1].replace(/^(\d{3})(\d{2})(\d{2})$/, '$1.$2.$3');
-          return `<span style="color:${color}">${status}</span><br/><span>${policyDate}</span>`
-        }
-        
+        const today = (new Date()).toLocaleDateString('zh-TW', {year: 'numeric', month: '2-digit', day: '2-digit'}).replace(/\//g, '')-19110000
+        if (!data) {
+          return `<span style="color:brown">未保險</span>`
+        }else{
+          const status = data > today ? "未到期" : "已到期"
+          const color = status === "未到期" ? 'green' : 'brown' 
+          const date = data.replace(/^(\d{3})(\d{2})(\d{2})$/, '$1.$2.$3')
+          return `<span style="color:${color}">${status}</span><br/><span>${date}</span>`
+        }  
     }
     },
     { data: "group_name", className: "f14cm" },
@@ -211,15 +218,9 @@ const infoTable= $('#searchResult').dataTable({
   // ],
 });
 
-// function updateTable() {
-// var infoTable = $('#searchResult').DataTable();
-// infoTable.ajax.reload();
-// }
-
-
 
 function openPage(id) {
-  window.open(`/admin/edit/${id}`);
+  window.open(`/admin/info/edit/${id}`);
 };
 
 $("#isubmit").click(function () {
@@ -232,10 +233,7 @@ function intoGroup(id){
   i('hintModalBody').innerHTML = `
   <div class="col-sm-12 row" id="intoGroupBox"></div>`
   vGroupList.forEach(g => {
-    // 從localstorage中讀取userInfo
-    const userInfoStr = localStorage.getItem('userInfo')
-    const userInfo = JSON.parse(userInfoStr)
-    const auth = userInfo.auth_id.map(value => `${value}`).join('|');
+    const auth = localUserInfo().auth_id.map(value => `${value}`).join('|');
     const authIdRegex = new RegExp(`^(${auth})`)   
     // authId為All全列出，否則就按照authIdRegex.test(g.id)列出
     if (auth ==="All" || authIdRegex.test(g.id)) {

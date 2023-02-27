@@ -1,4 +1,3 @@
-let userInfo = {}
 function disabled(ID){
     i(ID).setAttribute('disabled', true)
     $("#"+ID).prop('checked', false)
@@ -14,39 +13,56 @@ function haveToken(){
 }
 
 async function getUserInfo(){
-    const resp = await authAPI.userInfo()
-    const res = await resp.data
-    // 將userInfo轉換為JSON字符串
-    const userInfoStr = JSON.stringify(res.userInfo)
-    // 將userInfo存儲在localstorage中
+    const { data: { userInfo } } = await authAPI.userInfo()
+    const userInfoStr = JSON.stringify(userInfo)
     localStorage.setItem('userInfo', userInfoStr)
-    return userInfo = res.userInfo
+}
+
+function localUserInfo(){
+    return JSON.parse(localStorage.getItem('userInfo'))
 }
 
 async function navInfo(ID){
-    await getUserInfo()
-    const authId = userInfo.auth_id
+    const {authId, name} = await localUserInfo()
     if(ID==="navUser"){
-        i("navUser").textContent = userInfo.name
+        i("navUser").textContent = name
         if(authId.includes("All"))
-        return qO("#n_train, #n_auth").forEach(el=>{el.classList.remove("hidden")})
+        return qO(".nav_board_item").forEach(el=>{el.classList.remove("hidden")})
         // return qO("#n_train, #n_data, #n_auth").forEach(el=>{el.classList.remove("hidden")})
-        if(authId.includes("public"))
-        return i("leftWrapper").innerHTML = `
-        <div class="nav_board_item" id="n_ckeckIn"><h4>簽到簽退</h4></div>`
+        if(authId.includes("public")){
+            if (authId.length === 1){
+                qO(".nav_board_item").forEach(el=>{el.classList.add("hidden")})
+                i("n_checkIn").classList.remove("hidden")
+            } else {
+                i("n_checkIn").classList.remove("hidden")
+            }
+        }
     }
     if(ID==="boardUser"){
-        i("boardUser").textContent = userInfo.name
+        i("boardUser").textContent = name
         if(authId.includes("All"))  
-        return qO("#i_train, #i_data, #i_auth").forEach(el=>{el.classList.remove("hidden")}) 
-        if(authId.includes("public")) 
-        return i("boardWrapper").innerHTML = `<div class="item" id="i_checkIn">簽到簽退</div>`
+        return qO(".item").forEach(el=>{el.classList.remove("hidden")}) 
+        if(authId.includes("public")){
+            if (authId.length === 1){
+                qO(".item").forEach(el=>{el.classList.add("hidden")})
+                i("i_checkIn").classList.remove("hidden")
+            }else{
+                i("i_checkIn").classList.remove("hidden")
+            }
+        }
     }
 }
 
 function toPage(name){
+    const path = name.split("_")[1]
     i(name).addEventListener("click", ()=>{
-      return location.href = "/admin/" + name.split("_")[1]
+    location.href = "/admin/" + path
+    qO(".nav_board_item").forEach(el=>{
+        el.classList.remove("itemActive")
+        el.getElementsByTagName("h6")[0].classList.remove("h6Active")
+    })
+    i("i"+path).classList.add("itemActive")
+    i("i"+path).getElementsByTagName("h6")[0].classList.add("h6Active")
     })
 }
 
@@ -55,6 +71,7 @@ function logout(elmentId){
         const resp = await authAPI.logout()
         if (await resp.status===204) {
           removeToken()
+          localStorage.clear()
           location.href = "/admin/login"
         }
     })

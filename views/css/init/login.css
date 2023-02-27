@@ -5,7 +5,7 @@ body{
     background-size: 30%, 45%, cover;
 }
 
-.lgininBox{
+.loginBox{
   position: absolute;
   width: 57%;
   right: 0;
@@ -93,7 +93,7 @@ button {
     background-size: 330px, 50%, cover;
   }
 
-  .lgininBox{
+  .loginBox{
     position: absolute;
     margin: 10px auto;
     top: 90px;
@@ -103,7 +103,7 @@ button {
 }
 
 @media(max-width:620px){
-  .lgininBox{
+  .loginBox{
     width: 70%;
   }
 }
@@ -115,7 +115,7 @@ button {
                 url(/img/sky.jpg) no-repeat left 10% bottom fixed;
     background-size: 330px, 80%, cover;
   }
-  .lgininBox{
+  .loginBox{
     width: 80%;
   }
 
@@ -130,7 +130,7 @@ button {
 }
 
 @media(max-width:400px){
-  .lgininBox{
+  .loginBox{
     width: 90%;
   }
 }

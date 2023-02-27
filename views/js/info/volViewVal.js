@@ -121,16 +121,15 @@ async function getPicName(id, folderName){
     }
 }
 
+
+
 // 複選處理  ===========================================================
 vGroupList.forEach(g=>{
     // 從localstorage中讀取userInfo
-    const userInfoStr = localStorage.getItem('userInfo')
-    const userInfo = JSON.parse(userInfoStr)
-    const auth = userInfo.auth_id.map(value => `${value}`).join('|');
-    const authIdRegex = new RegExp(`^(${auth})`)
-
     // 如果不在authId中，就disabled
-    const option = auth ==="All" ? "" : !authIdRegex.test(g.id) ? "disabled" : ""
+    const auth = localUserInfo().authId.map(v => `${v}`).join('|')
+    const option = auth ==="All" ? "" : 
+                   !new RegExp(`^(${auth})`).test(g.id) ? "disabled" : ""
     checkbox("v_group", g, "", option)
     checkbox("v_group_leader", g, "L", "disabled")
     checkbox("v_group_vice", g, "V", "disabled")

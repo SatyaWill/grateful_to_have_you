@@ -22,7 +22,7 @@ const infoAPI = {
     return authAxios.post("/vol/volId", data, commonHeaders)
   },
   picUrl(folderName) {
-    return authAxios.get("/vol/picUrl", { params: folderName})
+    return authAxios.get("/vol/picUrl", {params: folderName})
   },
   // 上傳至S3
   uploadPic(url, file) {
@@ -45,3 +45,20 @@ const infoAPI = {
   }
 }
 
+const hoursAPI = { 
+  newCriteria(data) {
+    return authAxios.post("/vol/hourCriteria", data, commonHeaders)
+  },
+  editCriteria(data) {
+    return authAxios.patch("/vol/hourCriteria", data, commonHeaders)
+  },
+  checkinType(volId) {
+     return authAxios.get("/vol/checkin/"+volId)
+  },
+  checkinStart(data) {
+    return authAxios.post("/vol/checkin", data, commonHeaders)
+  },
+  checkinEnd(data) {
+    return authAxios.patch("/vol/checkin", data, commonHeaders)
+  },
+}

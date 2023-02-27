@@ -9,14 +9,15 @@ module.exports = {
     login: async (req, res) => {
         try {
             const { id , password } = req.body
-            const resp = await authModel.password(id)
+            const resp = await authModel.login(id)
             if (!bcrypt.compareSync(password, resp.password)) return errInfo(res, 422, 'Invalid credentials')
             const user = { id: id, authId: resp.authId }
+            const userInfo = { name: resp.name, authId: resp.authId }
             tokenList.push(refresh(user))
             const accessToken = access(user)
             const refreshToken = refresh(user)
             res.cookie('jwt', refreshToken, {httpOnly: true, SameSite: "None", maxAge: 8*60*60*1000 })
-            return res.status(200).json({message:"ok", accessToken: accessToken})
+            return res.status(200).json({message:"ok", accessToken, userInfo})
         }catch(e) {
             console.log(e)
             return errInfo(res, 500, "伺服器內部錯誤")

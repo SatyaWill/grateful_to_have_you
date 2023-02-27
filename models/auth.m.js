@@ -1,10 +1,10 @@
 const db = require("../config/db")
 
 module.exports = {
-    password: async (id) => {
+    login: async (id) => {
         try {
             const sql = `
-            SELECT a.password, JSON_Arrayagg(b.auth_id) authId
+            SELECT a.name, a.password, JSON_Arrayagg(b.auth_id) authId
             FROM agent a ,agent_auth b 
             WHERE a.id=b.agent_id AND a.id=? GROUP BY a.id`
             const data = await db.query(sql ,[id])

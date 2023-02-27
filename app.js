@@ -50,10 +50,11 @@ hbs.registerHelper("js", function (str, option) {
 
 // 登入
 app.get("/admin/login", (req, res) => {
-  res.render("login.html", { layout: false });
+  res.render("init/login.html", { layout: false });
 });
+
 app.get("/", (req, res) => {
-  res.redirect("index.html", { layout: false });
+  res.render("init/index.html", { layout: false });
 });
 
 const htmlAdmin = require("./routes/html.admin");
@@ -64,7 +65,7 @@ app.use("/auth", apiAuth);
 app.use("/vol", apiVol);
 
 app.get("*", (req, res) => {
-  res.status(404).render("404.html", { layout: false });
+  res.status(404).render("init/404.html", { layout: false });
 });
 
 app.listen(8000, () => console.log("Server is running!"));

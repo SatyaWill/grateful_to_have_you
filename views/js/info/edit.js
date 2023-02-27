@@ -1,5 +1,5 @@
 // 頁面初始化，path的id若非法，不進後端，前端直接導回board ==================
-const volId = new URL(location.href).pathname.split("/")[3];
+const volId = new URL(location.href).pathname.split("/")[4];
 let oldData = {}
 let editedVolData = {}
 let isCheckChanged = false

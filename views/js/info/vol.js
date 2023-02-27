@@ -92,7 +92,7 @@ i("vSave").addEventListener("click", async function(){
         const res = await resp.data
         if (resp.status===200 && res.message==="ok"){
             bodyToDoModal(`<h5>新增志工完成</h5>`, '新分頁查看', function(){
-                window.open(`/admin/edit/${i("v_vol_id").value}`)
+                window.open(`/admin/info/edit/${i("v_vol_id").value}`)
             })
             waitModalClose()
             i('hintModal').addEventListener('hidden.bs.modal', e => {

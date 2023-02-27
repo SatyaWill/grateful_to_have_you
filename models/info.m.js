@@ -18,11 +18,7 @@ module.exports = {
                 IF(tel!="" AND mobile !="", CONCAT(tel,"<br/>",mobile), CONCAT(tel,mobile)) tel,
                 join_date, 
                 IF(status="Y","收編", "離隊") status,
-                CASE
-                    WHEN p.end_date = "" OR p.end_date is null THEN '未保險'
-                    WHEN p.end_date <= DATE_FORMAT(NOW(), '%Y%m%d')-19110000 THEN CONCAT('已到期',",",p.end_date)
-                    ELSE CONCAT('未到期',",",p.end_date)
-                END AS policy
+                p.end_date policy_end_date
                 FROM vol 
                 LEFT JOIN v_policy p ON vol.vol_id = p.vol_id
                 WHERE status=${sqlParm}),
@@ -146,30 +142,19 @@ module.exports = {
         const sql3 = l.slice(0, -1)
 // =============================================================================
         try {
-            if (!d.group_id.length){
-                const res = await db.query(sql, sqlValue)
-                console.log("vol表更新數", res[0].affectedRows)
-                if (res[0].affectedRows) 
-                return {message: "ok"}
-                throw new Error("更新失敗")
-            } else if (d.leader.length + d.vice.length) {
-                await db.query(`START TRANSACTION`)
-                await db.query(sql, sqlValue)
+            await db.query('START TRANSACTION')
+            await db.query(sql, sqlValue)
+            if (d.group_id.length) {
                 await db.query(sql2)
-                await db.query(sql3)
-                console.log("t3");
-                await db.query(`COMMIT`)
-                console.log("vol group leader 3表更新完成");
-            }else{
-                await db.query(`START TRANSACTION`)
-                await db.query(sql, sqlValue)
-                await db.query(sql2)
-                await db.query(`COMMIT`)
-                console.log("vol group 2表更新完成");
             }
+            if (d.leader.length + d.vice.length) {
+                await db.query(sql3)
+            }
+            await db.query('COMMIT')
             return { message: 'ok' };
         }
-        catch (err) {
+        catch (err) {          
+            await db.query('ROLLBACK')
             console.error(err)
             return { error: err.message }
         }

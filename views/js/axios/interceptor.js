@@ -57,23 +57,49 @@ function headBodyModal(head,body){
   hintModal.show()
 }
 
+
+// 提示訊息tooltipList初始化 ===============================================================
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+// const exampleEl = document.getElementById('example')
+// const tooltip = new bootstrap.Tooltip(exampleEl, options)
+
 // 以下均為axios ====================================================================
 const authAxios = axios.create({
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
-    Authorization: `Bearer ${window.localStorage.getItem("accessToken")}`,
+    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
   },
   withCredentials: true,
   timeout: 30000,
 })
 const updateToken = (token) => {
-    window.localStorage.setItem("accessToken", token)
+    localStorage.setItem("accessToken", token)
     authAxios.defaults.headers.common["Authorization"] = `Bearer ${token}`
 }
 
+async function refreshToken(originalRequest) { // 給datatable ajax用
+  try {
+    const res = await authAxios.post('/auth/refresh');
+    localStorage.setItem('accessToken', res.data.accessToken);
+    originalRequest.headers.Authorization = 'Bearer ' + res.data.accessToken
+    return axios(originalRequest)
+  } catch (error) {
+    console.error(error);
+    removeToken()
+    bodyModal(`<h5>${err.response.status}: 作業逾時或無相關使用授權，請重新登入</h5>`)
+    i('hintModal').addEventListener('hidden.bs.modal', e => {
+      window.location.href = '/admin/login'
+    })
+    return Promise.reject(error)
+  }
+}
+
 const removeToken = () => {
-  window.localStorage.removeItem('accessToken')
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('userInfo');
   authAxios.defaults.headers.common['Authorization'] = ''
 };
 
@@ -106,9 +132,11 @@ authAxios.interceptors.response.use(function (response) {
                 originalRequest.headers.Authorization = 'Bearer ' + res.data.accessToken
                 return axios(originalRequest)
               }).catch((err) => {
-                localStorage.removeItem("accessToken")
+                removeToken()
                 bodyModal(`<h5>${err.response.status}: 作業逾時或無相關使用授權，請重新登入</h5>`)
-                window.location.href = '/admin/login'
+                i('hintModal').addEventListener('hidden.bs.modal', e => {
+                  window.location.href = '/admin/login'
+                })
                 return Promise.reject(error)
               })
           }
@@ -117,6 +145,7 @@ authAxios.interceptors.response.use(function (response) {
 
       case 403:
         bodyModal(`<h5>使用時間到，請重新登入</h5>`)
+        removeToken()
         i('hintModal').addEventListener('hidden.bs.modal', e => {
           window.location.href = '/admin/login'
       })

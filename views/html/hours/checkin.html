@@ -1,0 +1,28 @@
+{{css "/css/checkin.css"}}
+<!--
+♡ ♡ ᕬ ᕬ ♡ ♡
++♡( ⌯′-′⌯) ♡ +
+ ┏━♡━U U━♡━┓
+ ♡-感謝有你-♡
+ ┗━♡━━━━━♡━┛
+     -->
+<form class="checkinBox">
+    <div class="input-group">
+        <div class="input-group-text group-name" >志 工 編 號</div>
+        <input type="number" class="form-control group-body" id="vol_id" autofocus="autofocus" required>
+        <button class="btn input-group-text group-btn" id="check" disabled>查 詢</button>
+    </div>
+    <div id="infoCheck"></div>
+    <div class="col-md-12" id="group"></div>
+    <div class="hidden" id="hint1"></div>
+    <span class="invalid-feedback" id="hint">格式不符</span>
+
+    <div class="btn-group hidden" id="checkinBtn">
+        <div class="btn btn-light hidden" id="start" >簽 到</div>
+        <div class="btn btn-light hidden" id="end" >簽 退</div>
+        <div class="btn btn-light" id="cancel" >取 消</div>
+    </div>
+</form>
+
+
+{{js "/js/hours/checkin.js"}}

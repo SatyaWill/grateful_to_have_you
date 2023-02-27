@@ -1,0 +1,32 @@
+body{
+  background: url(/img/logo.png) no-repeat left 30px top 30px fixed,
+              url(/img/vols180.png) no-repeat right 30px bottom -3% fixed,
+              url(/img/cloud_light.jpg) no-repeat left 10% bottom fixed;
+  background-size: 330px, 35%, cover;
+}
+
+.hidden{
+  display: none;
+}
+
+
+@media(max-width:800px){
+  body{
+    background-size: 300px, 45%, cover;
+  }
+}
+
+
+@media(max-width:500px){
+  body{
+    background: url(/img/logo.png) no-repeat center top 30px fixed,
+                url(/img/vols180.png) no-repeat center bottom fixed,
+                url(/img/cloud_light.jpg) no-repeat left 10% bottom fixed;
+    background-size: 330px, 80%, cover;
+  }
+
+}
+
+
+
+
