@@ -1,0 +1,133 @@
+body{
+  background: url(/img/logo.png) no-repeat left 30px top 30px fixed,
+              url(/img/vols180.png) no-repeat right 30px bottom -3% fixed,
+              url(/img/cloud_light.jpg) no-repeat left 10% bottom fixed;
+  background-size: 330px, 35%, cover;
+}
+
+.hidden{
+  display: none;
+}
+main{
+  width: 85%;
+  margin: 140px auto 40px;
+}
+#indexBox{
+  width: 100%;
+  margin: 0px auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  background-color: #eeeeee97 ;
+  backdrop-filter: blur(6px);
+  filter:  drop-shadow(4px -4px 6px rgba(0, 0, 0, 0.164));
+  border-radius: 10px;
+  padding: 30px 40px;
+  box-shadow: 0px 2px 3px rgba(199, 196, 193, 0.979);
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  gap:15px;
+}
+.intro{
+  width: 45%;
+  color: dimgray;
+  line-height: 1.6;
+}
+.account{
+  width: 35%;
+  color: dimgray;
+  line-height: 1.55;
+}
+.account p{
+  margin-bottom: 3px;
+}
+.account b{
+  color: darkgoldenrod;
+}
+
+.myButton {
+  box-shadow: 0px 10px 14px -7px #276873;
+  background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+  background-color:#599bb3;
+  border-radius:8px;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:20px;
+  font-weight:bold;
+  padding:14px 26px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #3d768a;
+  margin: 8px auto;
+}
+.myButton:hover {
+  background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+  background-color:#408c99;
+}
+.myButton:active {
+  position:relative;
+  top:1px;
+}
+
+.card-body{
+  background-color: rgba(255, 255, 255, 0.84);
+  box-shadow: inset 0px 2px 3px rgba(199, 196, 193, 0.979);
+  border-radius: 5px;
+}
+.card-title{
+  font-weight: bold;
+  color: cadetblue;
+}
+
+ol, ul {
+  padding-left: 1.3rem;
+  margin-bottom: 0;
+  color: cornflowerblue;
+}
+
+.all{
+  color: gray;
+}
+
+@media(max-width:1000px){
+  main{
+    width: 90%;
+  }
+  #indexBox{
+    padding: 25px;
+  }
+}
+
+@media(max-width:800px){
+  body{
+    background-size: 300px, 45%, cover;
+  }
+  #indexBox{
+    padding: 30px;
+    flex-wrap: wrap;
+  }
+  .card-body{
+    width: 40%;
+  }
+}
+
+
+@media(max-width:500px){
+  body{
+    background: url(/img/logo.png) no-repeat center top 30px fixed,
+                url(/img/vols180.png) no-repeat center bottom fixed,
+                url(/img/cloud_light.jpg) no-repeat left 10% bottom fixed;
+    background-size: 330px, 80%, cover;
+  }
+  main{
+    width: 80%;
+  }
+  .card-body{
+    width: 80%;
+  }
+
+}
+
+
+
+

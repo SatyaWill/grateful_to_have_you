@@ -1,0 +1,280 @@
+{{css "/css/info.css"}}
+
+<div class="accordion-item volBox">
+    <div class="volInfo">
+        <i class="bi bi-folder2-open"></i>
+        志工基本資料
+    </div>
+    <form id="volForm" name="volForm" class="accordion-body" enctype="multipart/form-data">
+        <!--區塊1第1行-->
+        <div class="row row-cols-auto g-2 align-items-center" id="volSec1">
+            <!--姓名-->
+            <label class="col-form-label text-sm-end need" style="width:64px;">* 姓名</label>
+            <div class="col-xs-3">
+                <input id="v_name" name="name" type="text" class="form-control" style="width:110px;" required>
+                <div id="vNameHint" class="invalid-feedback">
+                    應至少二個非空白字元
+                </div>
+            </div>
+            <!--性別-->
+            <label class="col-form-label text-sm-end need" style="width:54px;">* 性別</label>
+            <div class="col ">
+                <select id="v_gender" name="gender" class="form-select form-select-sm lh-1" aria-label=".form-select-sm example">
+                    <option value="">--</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+                <div class="invalid-feedback">
+                    請選取性別
+                </div>
+            </div>
+        </div>
+        <!--區塊1第2行-->
+        <div class="row row-cols-auto g-2 align-items-center" id="volSec2">
+            <!--身分證-->
+            <label class="col-form-label text-sm-end need" style="width:64px;" required>* 身分證</label>
+            <div class="col-xs-3">
+                <input id="v_id_num" name="id_num" type="text" class="form-control"  style="width:110px;">
+                <div id="vIdHint" class="invalid-feedback">
+                    未正確填寫
+                </div>
+            </div>
+            <div class="col-form-check">
+                <input id="no_id_num" name="no_id_num" class="form-check-input" type="checkbox" value="1">
+                <label class="form-check-label" for="no_id_num">
+                不提供
+                </label>
+            </div>
+        </div>
+        <!--區塊1第3行-->
+        <div class="row row-cols-auto g-2 align-items-center line-dashed" id="volSec3">
+            <!--生日-->
+            <label class="col-form-label text-sm-end need" style="width:64px;">* 生日</label>
+            <div class="col-xs-3">
+                <input id="v_birthday" name="birthday" type="text" class="form-control"  
+                style="width:110px;" placeholder="格式0880101">
+                <div class="invalid-feedback">
+                    請填寫民國日期，格式0880101
+                </div>
+            </div>
+            <div class="col-form-check">
+                <input id="no_birthday" name="no_birthday" class="form-check-input" type="checkbox" value="1">
+                <label class="form-check-label" for="no_birthday">
+                不提供
+                </label>
+            </div>
+         </div>
+<!--=====區塊2=========================================================================-->
+        <!--區塊2-1 左-->
+        <div class="vol2Box line-dashed">
+        <!--區塊2-1 左-->
+            <div class="vol2BoxL">
+            <!--區塊2-1 左1-->
+                <div class="vol2BoxL1" id="vol2L1">
+                <!--區塊2-1 左1 第1行-->
+                    <div class="row row-cols-auto g-2 vol2BoxI">
+                        <!--志工編號-->
+                        <label class="col-form-label text-sm-end" style="width:64px;">志工編號</label>
+                        <div class="col-xs-3">
+                            <input id="v_vol_id" name="vol_id" type="text" class="form-control-plaintext" readonly>
+                        </div>
+                    </div>
+                <!--區塊2-1 左1 第2行-->
+                    <div class="row row-cols-auto g-2 vol2BoxI">
+                        <label class="col-form-label text-sm-end need" style="width:64px;">* 職業</label>
+                        <div class="col ">
+                            <select id="v_job_category" name="job_category" 
+                            class="form-select form-select-sm lh-1" style="width:100px;"
+                            aria-label=".form-select-sm example" required>
+                                <option value="">--</option>
+                                <option value="01">工商人士</option>
+                                <option value="02">公教人員</option>
+                                <option value="03">非公教退休</option>
+                                <option value="04">家管</option>
+                                <option value="05">學生</option>
+                                <option value="06">公教退休</option>
+                                <option value="99">其他</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                請選擇一個項目
+                            </div>
+                        </div>
+                        <label class="col-form-label text-sm-end rwdLeft-m">單位</label>
+                        <div class="col-xs-3">
+                            <input id="v_job" name="job" type="text" class="form-control">
+                            <div class="invalid-feedback">
+                                不可超過30字
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-auto g-2 vol2BoxI">
+                        <label class="col-form-label text-sm-end need" style="width:64px;">* 學歷</label>
+                        <div class="col ">
+                            <select id="v_education" name="education" 
+                            class="form-select form-select-sm lh-1" style="width:100px;"
+                            aria-label=".form-select-sm example" required>
+                                <option value="">--</option>
+                                <option value="01">博士</option>
+                                <option value="02">碩士</option>
+                                <option value="03">大專</option>
+                                <option value="05">高中(職)</option>
+                                <option value="07">國中及以下</option>
+                                <option value="99">其他</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                請選擇一個項目
+                            </div>
+                        </div>
+                        <label class="col-form-label text-sm-end rwdLeft-m">學校</label>
+                        <div class="col-xs-3">
+                            <input id="v_school" name="school" type="text" class="form-control">
+                            <div class="invalid-feedback">
+                                不可超過30字
+                            </div>
+                        </div>
+                        <!--紀錄冊-->
+                        <label class="col-form-label text-sm-end need" style="width:64px;">* 紀錄冊</label>
+                        <div class="col ">
+                            <select id="v_has_book" name="has_book" 
+                            class="form-select form-select-sm lh-1" style="width:100px;"
+                            aria-label=".form-select-sm example" required>
+                                <option value="">--</option>
+                                <option value="1">有</option>
+                                <option value="0">無</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                請選擇一個項目
+                            </div>
+                        </div>
+                        <div class="bookFile">
+                            <label style="width:64px">封面照片</label>
+                            <input type="file" id="v_book_pic" name="bookPic" class="form-control" style="width:80%;" disabled>               
+                        </div>
+                        <span id="v_book_picUrl"></span>
+                        <label class="col-form-label text-sm-end" style="width:64px;">發冊日期</label>
+                        <div class="col-xs-3">
+                            <input id="v_issue_date" name="issue_date" type="text" class="form-control"  
+                            style="width:110px;" placeholder="格式0880101" disabled>
+                            <div class="invalid-feedback">
+                                請填寫民國日期，格式0880101
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!--區塊2-1 左2-->
+                <div class="vol2BoxL2" id="vol2L2">
+                    <div class="row row-cols-auto g-2 vol2BoxI">
+                        <!--電話-->
+                        <label class="col-form-label text-sm-end rwdLeft">電話</label>
+                        <div class="col-xs-3">
+                            <input id="v_tel" name="tel" type="text" class="form-control">
+                        </div>
+                        <div class="invalid-feedback">
+                            不可超過20字
+                        </div>
+                        <!--手機-->
+                        <label class="col-form-label text-sm-end rwdLeft-m">手機</label>
+                        <div class="col-xs-3">
+                            <input id="v_mobile" name="mobile" type="text" class="form-control">
+                        </div>
+                        <div class="invalid-feedback">
+                            不可超過20字
+                        </div>
+                    </div>
+                    <div class="row row-cols-auto g-2 vol2BoxI vol2BoxIa">
+                        <!--地址-->
+                        <label class="col-form-label text-sm-end rwdLeft">地址</label>
+                        <div class="col-xs-3">
+                            <input id="v_address" name="address" 
+                            type="text" class="form-control">
+                        </div>
+                        <div class="noteBox">
+                            <label class="col-form-label rwdLeft">備註</label>
+                            <textarea id="v_note" name="note" rows="2" class="form-control ms-2" style="width: 246px"></textarea>
+                        </div>
+                        <div class="invalid-feedback">
+                            不可超過85字
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!--區塊2-1右--> 
+            <div class="vol2BoxR">
+                <div id="picPreview"></div>               
+                <input type="file" name="id_photo" id="v_id_photo" style="display:none;" accept="image/*">
+                <div id="picSelFileName"></div>
+                <button type="button" class="badge bg-primary bg-gradient shadow-sm" id="upPicBtn">選擇照片</button>
+            </div>
+        </div>
+
+        <div class="row row-cols-auto g-2 align-items-center line-dashed">
+            <!--收編狀態-->
+            <label class="col-form-label text-sm-end need">* 收編狀態</label>
+            <div class="col ">
+                <select id="v_status" name="status" 
+                class="form-select form-select-sm lh-1" style="width:100px;"
+                aria-label=".form-select-sm example" required>
+                    <option value="">--</option>
+                    <option value="Y">收編</option>
+                    <option value="N">離隊</option>
+                </select>
+                <div class="invalid-feedback">
+                    請選擇一個項目
+                </div>
+            </div>
+            <label class="col-form-label text-sm-end need">* 加入日期</label>
+            <div class="col-xs-3">
+                <input id="v_join_date" name="join_date" type="text" class="form-control"  
+                style="width:110px;" placeholder="格式0880101" required>
+                <div class="invalid-feedback">
+                    請填寫民國日期，格式0880101
+                </div>
+            </div>
+            <label class="col-form-label text-sm-end">離隊日期</label>
+            <div class="col-xs-3">
+                <input id="v_quit_date" name="quit_date" type="text" class="form-control"  
+                style="width:110px;" placeholder="格式0880101">
+                <div class="invalid-feedback">
+                    請填寫民國日期，格式0880101
+                </div>
+            </div>
+        </div>
+        <div class="col-form-check row row-cols-auto g-2 align-items-center line-dashed">
+            <label class="col-form-label groupTitle">參加組別</label>
+                <div class="col-form-check vGroup" id="v_group">
+                </div>
+        </div>
+        <div class="col-form-check row row-cols-auto g-2 align-items-center line-dashed">
+            <label class="col-form-label groupTitle">組長</label>
+                <div class="col-form-check vGroup" id="v_group_leader">
+                </div>
+        </div>
+        <div class="col-form-check row row-cols-auto g-2 align-items-center line-dashed">
+            <label class="col-form-label groupTitle">副組長</label>
+                <div class="col-form-check vGroup" id="v_group_vice">
+                </div>
+        </div>
+        <!--建檔資訊-->
+        <div class="row row-cols-auto g-2 align-items-center line-dashed">
+            <label class="col-form-label groupTitle">新增人員</label>
+            <div class="col ">
+                <input id="v_founder" ame="founder" type="text" class="form-control-plaintext" readonly>
+            </div>
+            <label class="col-form-label groupTitle">新增時間</label>
+            <div class="col ">
+                <input id="v_time" name="time" type="text" class="form-control-plaintext" readonly>
+            </div>
+            <label class="col-form-label groupTitle">修改人員</label>
+            <div class="col ">
+                <input id="v_editor" name="editor" type="text" class="form-control-plaintext" readonly>
+            </div>
+            <label class="col-form-label groupTitle">修改時間</label>
+            <div class="col ">
+                <input id="v_chg_time" name="chg_time" type="text" class="form-control-plaintext" readonly>
+            </div>
+        </div>
+        <button type="button" class="badge bg-primary bg-gradient m-2 shadow-sm" id="vSave">儲存</button>
+    </form>
+</div>
+    
+{{js "/js/info/infoTable.js,/js/info/volViewVal.js,/js/info/edit.js"}}

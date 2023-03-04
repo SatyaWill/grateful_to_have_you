@@ -1,0 +1,228 @@
+/* = icon ========================================= */
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0, 0);
+}
+i{
+    margin-right: 3px;
+    font-style: normal;
+}
+
+/* nav的帳號dropdown */
+.nav_dropdown{
+    min-width: 1rem;
+    padding: .3rem 0;
+    border: none;
+    background-color: unset ;
+    backdrop-filter: blur(6px);
+    filter:  drop-shadow(2px -2px 4px rgba(55, 55, 55, 0.164));
+    box-shadow: 0px 2px 3px rgba(199, 196, 193, 0.979);
+}
+.nav_dropdown *{
+    color: dimgrey;
+    font-size: 14px;
+    font-weight: bold;
+}
+.dropdown-item:focus, .dropdown-item:hover {
+    background-color: unset !important;
+}
+/* = accordion ========================================= */
+.accordion-item {
+    clear: both;
+    box-shadow: 0px 2px 3px rgba(199, 196, 193, 0.979);
+    margin-bottom: 15px;
+}
+.accordion-button{
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #e7f1ff;
+    color: #3d6578 !important;
+}
+.accordion-button:focus{
+    box-shadow: 0px 2px 3px rgba(199, 196, 193, 0.979);
+}
+.accordion-button::after {
+    width: 1rem;
+    height: 1rem;
+    background-size: 1rem;
+}
+.accordion-body{
+    text-align: left;
+}
+.infoDesc{
+    text-align: left;
+    background-color: #fff6da;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #e0e0e0;
+    color: brown;
+    font-weight: bold;
+    text-align: justify;
+}
+/* = datatable ====================================== */
+.dataTables_wrapper{
+    font-size: 14px;
+}
+.dataTables_wrapper .btn{
+    font-size: 13px;
+    padding: 4px 7px;
+}
+#searchResult_length select{
+    line-height: 1;
+    margin-bottom: 8px;
+}
+.custom-tb, .custom-tb thead{
+    box-shadow: inset 0px 1px 2px 1px #b2b7b7e4 !important;
+}
+.page-link{
+    font-size: 13px !important;
+    box-shadow: 0px 1px 1px #d2d7d7e4 !important;
+    padding: 6px 9px !important;
+}
+.f14cm{
+    font-size: 14px;
+    justify-content: center;
+    vertical-align: middle;
+    line-height: 1.2;
+}
+
+.card{
+    height: 50px;
+}
+
+
+.intoGroupLabel{
+    width: 90px;
+    text-align: left;
+    margin-bottom: 10px;
+}
+/* = modal ============================================= */
+.modal-header {
+    padding: 0.8rem 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    background-color: #eeeeee97 ;
+    backdrop-filter: blur(4px);
+    filter:  drop-shadow(0px 4px 4px rgba(49, 49, 49, 0.164));
+    border: none;
+}
+.modal-title {
+    line-height: 1.25;
+    color: dimgray;
+    font-weight: bold;
+}
+.fs-5 {
+    font-size: 1.18rem!important;
+}
+
+.modal-body {
+    padding: 1.4rem;
+    background: floralwhite;
+    box-shadow: inset 0px 2px 3px rgba(199, 196, 193, 0.979);
+}
+.modal-body * :not(.invalid-feedback) {
+    color: dimgray !important;
+    font-weight: bold;
+}
+.modal-body h5{
+    line-height: 1.5;
+}
+.modal-body .invalid-feedback {
+    font-size: 18px;
+    font-weight: bold;
+    background-color: mistyrose;
+    box-shadow: 0px 2px 3px rgba(199, 196, 193, 0.979);
+    padding: 4px;
+}
+
+.modal-footer{
+    padding: 0.2rem !important;
+    height: 45x;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    background-color: #eeeeee97 ;
+    backdrop-filter: blur(4px);
+    filter:  drop-shadow(0px 4px 4px rgba(49, 49, 49, 0.164));
+    box-shadow: 0px -2px 3px rgba(199, 196, 193, 0.979);
+}
+
+.modal-footer button{
+    padding: 3px 12px;
+    margin: 4px 5px;
+}
+.modal h5 {
+    margin-bottom: 0 !important;
+}
+.btn-close{
+    box-shadow: none !important;
+}
+.btn-close:hover{
+    box-shadow: none !important;
+}
+#waitModalClose{
+    position: absolute;
+    right:8px;
+    top:8px;
+    z-index: 2;
+    width: 0.6em;
+    height: 0.6em;
+}
+
+/* 標準設定 / 批次修改 的Modal內容==================================== */
+.auditForm {
+    display: flex;
+    gap: 3px;
+}
+
+.auditForm input {
+    font-size: 18px !important;
+    font-weight: bold;
+    width: 100% !important;
+    border: none;
+    box-shadow: inset 0px 2px 2px #b2b7b7e4;
+}
+
+.auditForm label {
+    font-size: 16px !important;
+    font-weight: bold;
+}
+
+.auditForm .form-select{
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1;
+    width: 100%;
+    border: none;
+    box-shadow: inset 0px 2px 2px #b2b7b7e4;
+}
+
+#b_note{
+    width: 100%;
+}
+
+.newAgent{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    margin: 10px auto 0;
+    box-shadow: inset 0px 2px 2px #b2b7b7e4;
+}
+
+.newAgentTitle{
+    text-align: left;
+    font-size: 17px;
+    padding-top: 8px;
+    font-weight: bold;
+    margin-left: 4px;
+    color: gray;
+}
+/* =modal */
+
+kbd{
+    background-color: cadetblue;
+}

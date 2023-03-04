@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <title>{{title}}</title>
+    <link rel="icon" type="image/png" href="/img/ico2.png" />
+    <!--datatable用此-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.2/b-2.3.4/r-2.4.0/sl-1.6.0/datatables.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.2/b-2.3.4/r-2.4.0/sl-1.6.0/datatables.min.js"></script>
+    <!--主要view用此-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    {{#each cssList}}
+    <link rel="stylesheet" href="{{this}}" />
+    {{/each}}
+  </head>
+  <body>
+    <nav class="navClass">
+      <div class="nav_container">
+        <div class="logo" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="回作業入口"></div>
+        <div class="nav_left" id="leftWrapper">
+          <div class="nav_board_item" id="n_info"><h6>基本資料</h6></div>
+          <!-- <div class="nav_board_item hidden" id="n_train"><h6>課程管理</h6></div> -->
+          <!-- <div class="nav_board_item" id="n_shift"><h6>志工排班</h6></div> -->
+          <div class="nav_board_item" id="n_audit"><h6>時數管理</h6></div>
+          <div class="nav_board_item" id="n_stats"><h6>時數統計</h6></div>
+          <!-- <div class="nav_board_item" id="n_honor"><h6>績優表揚</h6></div> -->
+          <!-- <div class="nav_board_item hidden" id="n_data"><h6>資料整合</h6></div> -->
+          <div class="nav_board_item hidden" id="n_auth"><h6>權限管理</h6></div>
+          <div class="nav_board_item hidden" id="n_checkin"><h6>簽到(退)</h6></div>
+        </div>
+        <div class="nav_right">
+          <div class="dropdown nav_item dropdown-toggle" id="dropdownWrapper" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-fill" id="navUser"></i>
+            <ul class="dropdown-menu nav_dropdown" id="dropdownMenu">
+              <li><a class="dropdown-item" id="editPW">修改密碼</a></li>
+            </ul>
+          </div>
+          <div class="nav_item" id="navLogout">登出</div>
+        </div>
+      </div>
+    </nav>
+    <main>{{{body}}}</main>
+    {{> modal}}
+    <!--axios攔截器-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/axios/API.js"></script>
+    <script src="/js/axios/interceptor.js"></script>
+    <!--主要-->
+    <script src="/js/user.js"></script>
+    <script src="/js/itemPage.js"></script>
+    {{#each jsList}}
+    <script src="{{this}}"></script>
+    {{/each}}
+  </body>
+</html>
