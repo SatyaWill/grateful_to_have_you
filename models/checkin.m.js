@@ -1,7 +1,7 @@
 const db = require("../config/db")
 const moment = require("moment")
 const today = moment().format("YYYYMMDD")-19110000
-const time = moment().format("hhmm").toString()
+const time = moment().format("HHmm").toString()
 
 module.exports = {
     type: async (id) => {
@@ -31,7 +31,6 @@ module.exports = {
     },
     start: async (d) => {
         try {
-            const g = d.group.toString()
             const sql = `
             INSERT checkin (vol_id, date, group_id, subgroup, start_time)
             VALUES (?, ?, ?, ?, ?)`
@@ -47,9 +46,7 @@ module.exports = {
     },
     end: async (id) => {
         try {
-            const sql = `UPDATE checkin SET end_time=? WHERE id=?`
-            const val = [time, id]
-            const res = await db.query(sql, val)
+            const res = await db.query(`CALL checkout(?)`, id)
             if (res[0].affectedRows)
             return {message: "ok"}
             throw new Error("No rows affected")

@@ -1,0 +1,35 @@
+{{css "/css/info.css"}}
+
+<div class="accordion-item">
+    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
+        <i class="bi bi-person-fill-gear"></i>
+        帳號設定
+    </button>
+<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+    <div class="infoDesc">
+        <i class="bi bi-arrow-down-square"></i>點選欲修改的資料列，再按「修改帳號」或「修改權限。」           
+    </div>
+    <div class="accordion-body">
+        <!-- 選單 -->
+        <form id="tableForm">
+            <table id="authSet" class="table table-bordered table-striped nowrap dt-responsive collapsed table-hover custom-tb" 
+            role="grid" aria-controls="authSet" style="width:100%">
+            <thead class="bg-light bg-gradient">
+                <tr>
+                    <th class="th-sm"></th>
+                    <th class="th-sm">帳號</th>
+                    <th class="th-sm">名稱</th>
+                    <th class="th-sm">權限範圍</th>
+                    <th class="th-sm">帳號狀態</th>
+                    <th class="th-sm">帳號異動</th>
+                    <th class="th-sm">權限異動</th>
+                </tr>
+            </thead>
+            </table>
+        </form>
+    </div>
+</div>
+</div>
+
+
+{{js "/js/admin/auth.js"}}

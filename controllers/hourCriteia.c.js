@@ -13,7 +13,7 @@ module.exports = {
         }
     },
     new: async (req, res) => {
-        const { error } = validate.newCriteia(req.body, { abortEarly: false });
+        const { error } = validate.newCriteria(req.body, { abortEarly: false });
         if (error) {
           const errors = error.details.map((detail) => detail.message);
           return res.status(400).json({ message: errors });
@@ -27,7 +27,7 @@ module.exports = {
         }
     },
     edit: async (req, res) => {
-        const { error } = validate.editCriteia(req.body, { abortEarly: false });
+        const { error } = validate.editCriteria(req.body, { abortEarly: false });
         if (error) {
           const errors = error.details.map((detail) => detail.message);
           return res.status(400).json({ message: errors });

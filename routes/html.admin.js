@@ -24,23 +24,23 @@ router.get("/checkin", (req, res) => {
 });
 
 router.get("/audit", (req, res) => {
-  res.render("hours/audit.html"), { title: "時數管理" };
+  res.render("hours/audit.html", { title: "時數管理" });
 });
 
 router.get("/stats", (req, res) => {
-  res.render("hours/stats.html"), { title: "時數統計" };
+  res.render("hours/stats.html", { title: "時數統計" });
 });
 
 router.get("/honor", (req, res) => {
-  res.render("hours/honor.html"), { title: "獎勵作業" };
+  res.render("hours/honor.html", { title: "獎勵作業" });
 });
 
 router.get("/train", (req, res) => {
-  res.render("admin/train.html"), { title: "訓練資料" };
+  res.render("admin/train.html", { title: "訓練資料" });
 });
 
 router.get("/auth", (req, res) => {
-  res.render("admin/auth.html"), { title: "權限管理" };
+  res.render("admin/auth.html", { title: "權限管理" });
 });
 
 module.exports = router;

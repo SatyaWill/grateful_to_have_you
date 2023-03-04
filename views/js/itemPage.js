@@ -4,7 +4,7 @@ navInfo("navUser")
 logout("navLogout")
 navItemActive(new URL(location.href).pathname.split("/")[2])
 // 跳轉至各頁面
-const navList =["n_info","n_train", "n_stats", "n_audit", "n_honor", "n_auth", "n_checkin"]
+const navList =["n_info", "n_stats", "n_audit", "n_auth", "n_checkin"]
 // const navList =["n_info","n_train", "n_shift", "n_hours", "n_input", "n_honor", "n_data", "n_auth"]
 navList.forEach(e=>{
     toPage(e)
@@ -12,7 +12,7 @@ navList.forEach(e=>{
 
 c("logo")[0].addEventListener("click", function() {
     return location.href = "/admin/board"
-  })
+})
 
 function navItemActive(path){
   i("n_"+path).classList.add("itemActive")
@@ -27,6 +27,23 @@ function toArray(name){
       })
     return array
 }
+
+const RE = {
+  name: /^[^\s]{2,30}$/,
+  gender: /^(男|女)$/,
+  id: /^[A-Z][1-2]\d{8}$/,
+  agent_id: /^[^\s]{3,30}$/,
+  date: /^[01][0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/,
+  job_category: /^(01|02|03|04|05|06|99)$/,
+  education: /^(01|02|03|05|07|99)$/,
+  bit: /^(0|1)$/,
+  status: /^(Y|N|D)$/,
+  L20: /^.{1,20}$/,
+  L30: /^.{1,30}$/,
+  L85: /^.{1,85}$/,
+  time: /^(?:[0-9]|[01][0-9]|2[0-3])(?:[0-5][0-9])$/,
+}
+
 
 const iSectorList = [
   {id:"A", name:"總務"},
@@ -83,13 +100,33 @@ const aGroupList = [
   {id:"A7", name:"交通"},
   {id:"B1", name:"護七"},
   {id:"B2", name:"法器"},
-  // {id:"B2a", name:"法器-蔡老師"},
-  // {id:"B2b", name:"法器-何老師"},
   {id:"B3", name:"關懷"},
   {id:"C1", name:"書務"},
   {id:"C2", name:"護生"},
   {id:"C3", name:"救濟"},
   {id:"L", name:"啟蒙班"},   
+]
+
+const authList = [
+  {id:'All', name: '全部'},
+  {id:'A', name: '總務部'},
+  {id:'B', name: '法務部'},
+  {id:'C', name: '慈務部'},
+  {id:'L', name: '啟蒙班'},
+  {id:'A1', name: '接待'},
+  {id:'A2', name: '清潔'},
+  {id:'A3', name: '茶水'},
+  {id:'A4', name: '香積'},
+  {id:'A5', name: '資訊'},
+  {id:'A6', name: '安全'},
+  {id:'A7', name: '交通'},
+  {id:'B1', name: '護七'},
+  {id:'B2', name: '法器'},
+  {id:'B3', name: '關懷'},
+  {id:'C1', name: '書務'},
+  {id:'C2', name: '護生'},
+  {id:'C3', name: '救濟'},
+  {id:'public', name: '簽到退'},
 ]
 
 const datatableLang = {
@@ -124,7 +161,9 @@ const datatableLang = {
   },
   buttons: {
     selectAll: "全選",
-    selectNone: "取消全選",
+    selectNone: "取消選擇",
     delete: "刪除",
+    showSelected: "只顯示所選",
+    excel: "下載excel",
   },
 };

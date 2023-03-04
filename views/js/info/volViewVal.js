@@ -1,17 +1,4 @@
 'use strict'
-const RE = {
-    name: /^[^\s]{2,30}$/,
-    gender: /^(男|女)$/,
-    id: /^[A-Z][1-2]\d{8}$/,
-    date: /^[01][0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/,
-    job_category: /^(01|02|03|04|05|06|99)$/,
-    education: /^(01|02|03|05|07|99)$/,
-    bit: /^(0|1)$/,
-    status: /^(Y|N|D)$/,
-    L20: /^.{1,20}$/,
-    L30: /^.{1,30}$/,
-    L85: /^.{1,85}$/,
-}
 const formFields = {
     v_name: {required: true, regex: RE.name},
     v_gender: {required: true, regex: RE.gender},
@@ -30,7 +17,7 @@ const formFields = {
     v_school: {required: false, regex: RE.L30},
     v_job: {required: false, regex: RE.L30},
     v_note: {required: false, regex: RE.L85},
-  };
+};
 // 輸入驗證 =========================================================
 checkedResp("no_id_num", "v_id_num", "A100000000")
 checkedResp("no_birthday", "v_birthday", "0010101")
@@ -125,9 +112,6 @@ async function getPicName(id, folderName){
 
 // 複選處理  ===========================================================
 vGroupList.forEach(g=>{
-    // 從localstorage中讀取userInfo
-    // 如果不在authId中，就disabled
-    const auth = localUserInfo().authId.map(v => `${v}`).join('|')
     const option = auth ==="All" ? "" : 
                    !new RegExp(`^(${auth})`).test(g.id) ? "disabled" : ""
     checkbox("v_group", g, "", option)

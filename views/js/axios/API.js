@@ -14,8 +14,21 @@ const authAPI = {
   },
   userInfo() {
     return authAxios.get("/auth/userInfo")
+  },
+  newAgent(data) {
+    return authAxios.post("/auth/agent", data, commonHeaders)
+  },
+  editAgent(data) {
+    return authAxios.patch("/auth/agent", data, commonHeaders)
+  },
+  editAgentAuth(data) {
+    return authAxios.patch("/auth/agentAuth", data, commonHeaders)
+  },
+  editPassword(data) {
+    return authAxios.patch("/auth/password", data, commonHeaders)
   }
 }
+
 const infoAPI = {
   // search(data) {return authAxios.post("/vol/info", data, commonHeaders)},
   volId(data) {
@@ -60,5 +73,14 @@ const hoursAPI = {
   },
   checkinEnd(data) {
     return authAxios.patch("/vol/checkin", data, commonHeaders)
+  },
+  hourAuditCount(isOver, month) {
+    return authAxios.get(`/vol/hourAuditCount/${isOver}/${month}`, commonHeaders)
+  },
+  hourAudit(type, data) {
+    return authAxios.patch("/vol/hourAudit/"+type, data, commonHeaders)
+  },
+  toRecords(data) {
+    return authAxios.post("/vol/hourRecords", data, commonHeaders)
   },
 }

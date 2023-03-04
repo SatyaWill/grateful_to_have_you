@@ -60,37 +60,17 @@ i("iclear").addEventListener("click", function() {
 // 區塊二：查詢結果
 const infoTable= $('#searchResult').dataTable({
   columnDefs: [ 
-  //   {
-  //     orderable: false,
-  //     className: 'select-checkbox select-checkbox-all',
-  //     targets: 0
-  // },
   {
     className: 'control',
     orderable: false,
     targets:   1
 } 
  ],
-  // select: {
-  //     style: 'multi',
-  //     items: "row",
-  //     selector: 'td:first-child'
-  // },
   autoWidth: true,
   searching: false, //關閉及時查詢的欄位,serverSide若開啟此項,會造成每輸入一個字就對server做查詢
   processing: 10,
   serverSide: true, //分頁&顯示筆數之操作由server控制
   stateSave: true,
-  // stateSaveCallback: function (settings, data) {
-  //     var frm_data = $("#info1Form").serializeArray();
-  //     $.each(frm_data, function (key, val) {
-  //       data[val.name] = val.value;
-  //   });
-  //     localStorage.setItem( 'DataTables_' + settings.sInstance, JSON.stringify(data) )
-  // },
-  // stateLoadCallback: function (settings) {
-  //     return JSON.parse( localStorage.getItem( 'DataTables_' + settings.sInstance ) )
-  // },
   language: datatableLang,
       // url: "https://cdn.datatables.net/plug-ins/1.13.2/i18n/zh-HANT.json" 
   responsive: {
@@ -133,15 +113,6 @@ const infoTable= $('#searchResult').dataTable({
   "<'row'<'col-sm-12'tr>>" + // 主表
   "<'row'<'col-sm-5'i><'col-sm-7'p>>", //顯示幾頁 第幾頁
   columns: [
-    // {
-    //     data: null,
-    //     tittle: "",
-    //     orderable: false,
-    //     defaultContent: "",
-
-    //     id: "select-item",
-    //     className: "select-checkbox",
-    // },
     {
       data: "canEdit",
       className: "text-center align-middle",
@@ -154,8 +125,6 @@ const infoTable= $('#searchResult').dataTable({
               var btn = 
               `<div class="btn btn-primary bg-gradient btn-sm shadow-sm"
               onclick="openPage(${row.vol_id})">編輯</div>`
-              // `<a class="btn btn-primary bg-gradient btn-sm shadow-sm"
-              //   href="/admin/edit/${row.vol_id}" target="_blank">編輯</a>`
           }
           return btn;
           },
@@ -204,18 +173,6 @@ const infoTable= $('#searchResult').dataTable({
     },
     { data: "group_name", className: "f14cm" },
   ],
-  // buttons: [
-  //     "selectAll",
-  //     "selectNone",
-  //     {
-  //         text: "加入/退出小組",
-  //         className: "btn btn-primary bg-gradient btn-sm shadow-sm",
-  //         name: "modify",
-  //         action: function (e, dt, node, config) {
-  //             modlfySelected(infoTable);
-  //         },
-  //     },
-  // ],
 });
 
 
@@ -233,7 +190,6 @@ function intoGroup(id){
   i('hintModalBody').innerHTML = `
   <div class="col-sm-12 row" id="intoGroupBox"></div>`
   vGroupList.forEach(g => {
-    const auth = localUserInfo().auth_id.map(value => `${value}`).join('|');
     const authIdRegex = new RegExp(`^(${auth})`)   
     // authId為All全列出，否則就按照authIdRegex.test(g.id)列出
     if (auth ==="All" || authIdRegex.test(g.id)) {

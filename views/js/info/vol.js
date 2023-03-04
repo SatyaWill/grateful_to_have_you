@@ -23,17 +23,16 @@ async function IsExistVol(){
                 "找到以下志工資料，請確認沒有重複後，再加入。" 
                 i('hintModalBody').innerHTML=`
                 <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th scope="col">志工編號</th>
-                    <th scope="col">姓名</th>
-                    <th scope="col">生日</th>
-                    <th scope="col">狀態</th>
-                </tr>
-                </thead>
-                <tbody id="hintModaltbody">
-                </tbody>
-            </table>`
+                    <thead>
+                        <tr>
+                            <th scope="col">志工編號</th>
+                            <th scope="col">姓名</th>
+                            <th scope="col">生日</th>
+                            <th scope="col">狀態</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hintModaltbody"></tbody>
+                </table>`
                 res.data.forEach(d=>{
                     i('hintModaltbody').innerHTML += `
                     <td>${d.vol_id}</td>

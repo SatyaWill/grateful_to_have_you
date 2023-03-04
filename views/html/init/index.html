@@ -5,8 +5,9 @@
     <meta charset="utf-8" />
     <title>有你真好~grateful!</title>
     <link rel="icon" type="image/png" href="/img/ico2.png"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.2/b-2.3.4/r-2.4.0/sl-1.6.0/datatables.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"/>
     <link rel="stylesheet" type="text/css" href="/css/all.css"/>
     <link rel="stylesheet" type="text/css" href="/css/init/index.css"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
@@ -15,6 +16,52 @@
 </head>
 <body>
     <main>
+        <div id="indexBox">
+            <div class="card-body intro">
+                大規模的志工單位，因人數眾多，各組有其管理標準<br/>
+                志工資料管理、時數計算，需要耗費很多時間、精力<br/>
+                本系統以志工單位實際需求，實作以下功能，達成輕鬆管理之目的<br/>
+            </div>
+            <div class="card-body account">
+                <p class="card-title">展示帳號（密碼相同）：</p>
+                管理者<b>admin</b>、主管<b>AAA</b>、組長<b>DDD</b>、簽到<b>public</b><br/>
+                管理者有最高權限，藍字表示依部門組別管理
+            </div>
+            <a href="/admin/board"><button class="myButton">前往<br/>查看</button></a>
+            <div class="card-body">
+                <h5 class="card-title">志工基本資料</h5>
+                <ul>
+                    <li class="all">多條件複合查詢</li>
+                    <li>分權分組管理</li>
+                    <li>新增志工</li>
+                    <li>編輯志工</li>
+                    <li>照片管理</li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">時數管理</h5>
+                <ul>
+                    <li class="all">線上簽到(退)</li>
+                    <li>自訂審查標準</li>
+                    <li>分組審查時數</li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">時數統計</h5>
+                <ul>
+                    <li class="all">依志工歷年統計</li>
+                    <li>依組別及年度統計</li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">權限管理</h5>
+                <ul>
+                    <li>新增帳號</li>
+                    <li>修改帳號</li>
+                    <li>設定權限</li>           
+                </ul>
+            </div>
+        </div>
     </main>
     {{> modal}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

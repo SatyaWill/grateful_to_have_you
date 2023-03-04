@@ -13,6 +13,24 @@ i{
     font-style: normal;
 }
 
+/* nav的帳號dropdown */
+.nav_dropdown{
+    min-width: 1rem;
+    padding: .3rem 0;
+    border: none;
+    background-color: unset ;
+    backdrop-filter: blur(6px);
+    filter:  drop-shadow(2px -2px 4px rgba(55, 55, 55, 0.164));
+    box-shadow: 0px 2px 3px rgba(199, 196, 193, 0.979);
+}
+.nav_dropdown *{
+    color: dimgrey;
+    font-size: 14px;
+    font-weight: bold;
+}
+.dropdown-item:focus, .dropdown-item:hover {
+    background-color: unset !important;
+}
 /* = accordion ========================================= */
 .accordion-item {
     clear: both;
@@ -85,8 +103,57 @@ i{
     margin-bottom: 10px;
 }
 /* = modal ============================================= */
+.modal-header {
+    padding: 0.8rem 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    background-color: #eeeeee97 ;
+    backdrop-filter: blur(4px);
+    filter:  drop-shadow(0px 4px 4px rgba(49, 49, 49, 0.164));
+    border: none;
+}
+.modal-title {
+    line-height: 1.25;
+    color: dimgray;
+    font-weight: bold;
+}
+.fs-5 {
+    font-size: 1.18rem!important;
+}
+
+.modal-body {
+    padding: 1.4rem;
+    background: floralwhite;
+    box-shadow: inset 0px 2px 3px rgba(199, 196, 193, 0.979);
+}
+.modal-body * :not(.invalid-feedback) {
+    color: dimgray !important;
+    font-weight: bold;
+}
+.modal-body h5{
+    line-height: 1.5;
+}
+.modal-body .invalid-feedback {
+    font-size: 18px;
+    font-weight: bold;
+    background-color: mistyrose;
+    box-shadow: 0px 2px 3px rgba(199, 196, 193, 0.979);
+    padding: 4px;
+}
+
 .modal-footer{
     padding: 0.2rem !important;
+    height: 45x;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    background-color: #eeeeee97 ;
+    backdrop-filter: blur(4px);
+    filter:  drop-shadow(0px 4px 4px rgba(49, 49, 49, 0.164));
+    box-shadow: 0px -2px 3px rgba(199, 196, 193, 0.979);
+}
+
+.modal-footer button{
+    padding: 3px 12px;
+    margin: 4px 5px;
 }
 .modal h5 {
     margin-bottom: 0 !important;
@@ -105,4 +172,57 @@ i{
     width: 0.6em;
     height: 0.6em;
 }
+
+/* 標準設定 / 批次修改 的Modal內容==================================== */
+.auditForm {
+    display: flex;
+    gap: 3px;
+}
+
+.auditForm input {
+    font-size: 18px !important;
+    font-weight: bold;
+    width: 100% !important;
+    border: none;
+    box-shadow: inset 0px 2px 2px #b2b7b7e4;
+}
+
+.auditForm label {
+    font-size: 16px !important;
+    font-weight: bold;
+}
+
+.auditForm .form-select{
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1;
+    width: 100%;
+    border: none;
+    box-shadow: inset 0px 2px 2px #b2b7b7e4;
+}
+
+#b_note{
+    width: 100%;
+}
+
+.newAgent{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    margin: 10px auto 0;
+    box-shadow: inset 0px 2px 2px #b2b7b7e4;
+}
+
+.newAgentTitle{
+    text-align: left;
+    font-size: 17px;
+    padding-top: 8px;
+    font-weight: bold;
+    margin-left: 4px;
+    color: gray;
+}
 /* =modal */
+
+kbd{
+    background-color: cadetblue;
+}

@@ -16,9 +16,16 @@
 <body>
     <nav>
         <div class="frame">
-            <div class="nav_left_b"><img class="nav_pic" src="/img/logo.png"></div>
+            <div class="nav_left_b" id="board_logo">
+                <img class="nav_pic" src="/img/logo.png" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="點我回首頁">
+            </div>
             <div class="nav_right_b">
-                <div class="nav_item_b" ><i class="bi bi-person-fill" id="boardUser"></i></div>
+                <div class="dropdown nav_item_b dropdown-toggle" id="dropdownWrapper" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-fill" id="boardUser"></i>
+                    <ul class="dropdown-menu nav_dropdown" id="dropdownMenu">
+                      <li><a class="dropdown-item" id="editPW">修改密碼</a></li>
+                    </ul>
+                  </div>
                 <div class="nav_item_b" id="boardLogout">登出</div>
             </div>
         </div>
@@ -26,11 +33,11 @@
     <main>
         <div class="wrapper" id="boardWrapper">
             <div class="item" id="i_info">基本資料</div>
-            <div class="item hidden" id="i_train">課程管理</div>
+            <!-- <div class="item hidden" id="i_train">課程管理</div> -->
             <!-- <div class="item" id="i_shift">志工排班</div> -->
             <div class="item" id="i_audit">時數管理</div>
             <div class="item" id="i_stats">時數統計</div>
-            <div class="item" id="i_honor">績優表揚</div>
+            <!-- <div class="item" id="i_honor">績優表揚</div> -->
             <!-- <div class="item hidden" id="i_data" >資料整合</div> -->
             <div class="item hidden" id="i_auth">權限管理</div>
             <div class="item hidden" id="i_checkin">簽到(退)</div>

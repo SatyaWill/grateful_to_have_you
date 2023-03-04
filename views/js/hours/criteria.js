@@ -43,7 +43,7 @@ const criteriaTable = $('#hoursCriteria').dataTable({
         className: "text-center align-middle",
         render: function (data, type, row) {
                 var btn = 
-                `<div class="btn btn-secondary bg-gradient btn-sm shadow-sm"
+                `<div class="btn btn-secondary bg-gradient btn-sm shadow-sm cedit_btn"
                 onclick='editCriteria("${row.id}", "${row.group_name}", 
                     "${row.group_id+row.subgroup}", "${row.name}", "${row.is_active}", 
                     "${row.start_time}","${row.end_time}")'>編輯</div>`
@@ -97,7 +97,6 @@ i("formWrapper").innerHTML = `
 </form>`
 
 // 根據使用者權限顯示對應的部門和組別=======================================
-const auth = localUserInfo().authId.map(v => `${v}`).join('|')
 qO(".groupSelector").forEach(i=>{
     i.innerHTML = "<option value=''>組別</option>"
     aGroupList.forEach(g => {
@@ -108,14 +107,13 @@ qO(".groupSelector").forEach(i=>{
 }) 
 
 // 起訖時間限制 ===========================================
-const timeRE = /^(?:[0-9]|[01][0-9]|2[0-3])(?:[0-5][0-9])$/
 function timeCheck(ids){
     qO(ids).forEach(i=>{
         i.addEventListener("input", function(){
             if (this.value.length > 4) return this.value = this.value.slice(0, 4);
         })
         i.addEventListener("blur", function(){
-            if (!timeRE.test(this.value))
+            if (!RE.time.test(this.value))
             return i.classList.add("is-invalid")
             i.classList.remove("is-invalid")
         })
@@ -133,7 +131,7 @@ function canSendData(formId, btnId="") {
     const e = form.elements
 
     form.addEventListener("change", function() {
-      const timeStatis = timeRE.test(e["start_time"].value) && timeRE.test(e["end_time"].value);
+      const timeStatis = RE.time.test(e["start_time"].value) && RE.time.test(e["end_time"].value);
       const allTimeStatus = e["end_time"].value > e["start_time"].value;
 
       const status = e["group"].value && e["name"].value && timeStatis && allTimeStatus;
@@ -179,25 +177,24 @@ i("addCriteria").addEventListener("click", async function() {
     }
   });
 
-
 function editCriteria(id, group_name, group, name, is_active, start_time, end_time){
     i("hintModalHead").innerHTML = `編號${id}-${group_name}`
     i("hintModalBody").innerHTML =`
-    <form id="editForm">
+    <form class="auditForm col-row-auto" id="editForm">
         <input type="text" class="form-control hidden" name="group" value="${group}">
-        <div class="form-floating mb-3">
+        <div class="form-floating col">
             <input type="text" class="form-control" id="e_name" name="name" value="${name}">
             <label for="e_name">名稱</label>
         </div>
-        <div class="form-floating">
+        <div class="form-floating col">
             <input type="number" class="form-control" id="eST" name="start_time" value="${start_time}">
             <label for="eST">開始時間</label>
         </div>
-        <div class="form-floating">
+        <div class="form-floating col">
             <input type="number" class="form-control" id="eET" name="end_time" value="${end_time}">
             <label for="eET">結束時間</label>
         </div>
-        <div class="form-floating">
+        <div class="form-floating col">
         <select class="form-select" id="is_active" name="is_active">
             <option selected value="${is_active}">${is_active==="Y"?"使用":"暫停"}</option>
             <option value='${is_active==="Y"?"N":"Y"}'>${is_active==="Y"?"暫停":"使用"}</option>
@@ -217,7 +214,7 @@ function editCriteria(id, group_name, group, name, is_active, start_time, end_ti
             is_active: i("is_active").value
         }
         if (!ifCanSend || isDuplicate(oldData, data) ){
-            alert("資料格式不符或重複")
+            bodyModal("<h5>資料格式不符或重複</h5>")
         } else {
             sendEditCriteria(data)
         }

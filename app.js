@@ -21,15 +21,6 @@ app.engine("html", hbs.__express);
 hbs.registerPartials(__dirname + "/views/html/layout");
 hbs.registerPartials(__dirname + "/views/html/partials");
 
-// // 注册默认layout
-// hbs.registerPartials(path.join(__dirname, "views/partials"));
-// app.set("view options", { layout: "default" });
-// // 注册自定义layout
-// hbs.registerPartials(path.join(__dirname, "views/custom-layouts"));
-// hbs.registerHelper("customLayout", function(name) {
-//   return "layouts/" + name;
-// });
-
 hbs.registerHelper("css", function (str, option) {
   let cssList = this.cssList || [];
   str = str.split(/[,，;；]/);

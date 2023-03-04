@@ -7,9 +7,9 @@
     </button>
     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
         <div class="infoDesc">
-            <i class="bi bi-arrow-down-square"></i>此為志工時數計算的依據。預設「起訖時間相減，以0.5小時(± 15分鐘)為單位」。           
+            <i class="bi bi-arrow-down-square"></i>志工簽退完成時，系統會依此計算時數。預設「起訖時間相減，以0.5小時(± 15分鐘)為單位」。           
         </div>
-        <div class="accordion-body" id="">
+        <div class="accordion-body" >
             <!-- 表格 -->
             <table id="hoursCriteria" class="table table-bordered table-striped nowrap dt-responsive collapsed table-hover custom-tb" 
             role="grid" aria-controls="hoursCriteria" style="width:100%">
@@ -36,34 +36,47 @@
         時數審核
     </button>
     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
-        <div class="accordion-body" id="">
+        <div class="infoDesc">
+            <i class="bi bi-arrow-down-square"></i>修改審核時數與備註：(1)輸入後，選取待存資料列，按「儲存輸入資料」或 (2)選取資料列，按「批次修改」。<br/>
+            <i class="bi bi-arrow-down-square"></i>可搭配「全選」、「取消選擇」按鈕、<kbd>Ctrl</kbd> 或 <kbd>Shift</kbd> + 左鍵自由多選。<br/>
+            <i class="bi bi-arrow-down-square"></i>資料確定無誤，按「提交」完成作業，資料提交後，如欲修改，請洽管理員。           
+        </div>
+        <div class="accordion-body">
             <!-- 選單 -->
-            <!-- <div class="input-group audit_selector">
-                <select class="form-select groupSelector" aria-label="Example select with button addon">
-                </select>
-                <button class="btn btn-secondary" type="button">新增標準</button>
-            </div> -->
-            <div class="btn-group" id="audit_group">
-            </div>
-            <table id="hoursAudit" class="table table-bordered table-striped nowrap dt-responsive collapsed table-hover custom-tb" 
-            role="grid" aria-controls="hoursAudit" style="width:100%">
-              <thead class="bg-light bg-gradient">
-                <tr>
-                    <th class="th-sm"></th>
-                    <th class="th-sm"></th>
-                    <th class="th-sm">簽到編號</th>
-                    <th class="th-sm">志工編號</th>
-                    <th class="th-sm">姓名</th>
-                    <th class="th-sm">日期</th>
-                    <th class="th-sm">起時</th>
-                    <th class="th-sm">訖時</th>
-                    <th class="th-sm">標準</th>
-                    <th class="th-sm">計算時數</th>
-                    <th class="th-sm">審核時數</th>
-                    <th class="th-sm">備註</th>    
-                </tr>
-              </thead>
-            </table>
+            <form id="periodGroup">
+                <div class="input-group audit_selector period">
+                    <select class="form-select" id="month" name="month" aria-label="Example select with button addon">
+                        <option value="T">本月</option>
+                        <option value="L" selected="selected">前一月</option>
+                        <option value="L2">前二月</option>
+                    </select>
+                    <input type="radio" class="btn-check" name="isAuditOver" id="notAuditOver" autocomplete="off" value="N"checked>
+                    <label class="btn btn-light" for="notAuditOver">未提交</label>
+                    <input type="radio" class="btn-check" name="isAuditOver" id="auditOver" autocomplete="off" value="Y"c>
+                    <label class="btn btn-light" for="auditOver">已提交</label>
+                </div>
+                <div class="btn-group" id="groupBtn"></div>
+            </form>
+            <form id="tableForm">
+                <table id="hoursAudit" class="table table-bordered table-striped nowrap dt-responsive collapsed table-hover custom-tb" 
+                role="grid" aria-controls="hoursAudit" style="width:100%">
+                <thead class="bg-light bg-gradient">
+                    <tr>
+                        <th class="th-sm"></th>
+                        <th class="th-sm">紀錄#</th>
+                        <th class="th-sm">志工#</th>
+                        <th class="th-sm" data-priority="1">姓名</th>
+                        <th class="th-sm" data-priority="1">日期</th>
+                        <th class="th-sm">標準(#)</th>
+                        <th class="th-sm" data-priority="1">起訖時間</th>
+                        <th class="th-sm" data-priority="1">計算<br/>時數</th>
+                        <th class="th-sm" data-priority="1">審核<br/>時數</th>
+                        <th class="th-sm" data-priority="1">備註</th>
+                        <th class="th-sm" data-priority="1">經手人</th>
+                    </tr>
+                </thead>
+                </table>
+            </form>
         </div>
     </div>
 </div>

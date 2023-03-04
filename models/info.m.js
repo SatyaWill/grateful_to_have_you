@@ -2,7 +2,7 @@ const db = require("../config/db")
 const moment = require("moment")
 const today = moment().format("YYYYMMDD")-19110000
 const thisYear = moment().format("YYYY")-1911
-const now = moment().format("YYYY-MM-DD hh:mm:ss").toString()
+const now = moment().format("YYYY-MM-DD HH:mm:ss").toString()
 const url = `https://d3r92fcxan8msh.cloudfront.net/`
 
 module.exports = {
@@ -279,7 +279,7 @@ module.exports = {
         }).join();
         const sql2 = `INSERT vol_group 
             (vol_id, group_id, subgroup, status) VALUES ${insertData}
-            on duplicate key update status=1 ,chg_time="${now}"`;
+            ON DUPLICATE KEY UPDATE status=1 ,chg_time="${now}"`;
 
 // vol_leader ===================================================================
         const insertLeaderData = d.addLeader.map(l => {
@@ -294,7 +294,7 @@ module.exports = {
   
         const sql3 = `INSERT vol_leader 
             (vol_id, group_id, subgroup, role, status) VALUES ${insertLeaderData}
-            on duplicate key update status=1, chg_time="${now}"`; 
+            ON DUPLICATE KEY UPDATE status=1, chg_time="${now}"`; 
 
 // 取消 vol_group =================================================================
         const cancelGroup = d.rmGroupId.map(i => {
@@ -357,8 +357,7 @@ module.exports = {
             const sql2 = `INSERT vol_group 
             (vol_id, group_id, subgroup, status) 
             VALUES ${insertData} 
-            on duplicate key update status=1, chg_time="${now}"`    
-            console.log(sql2); 
+            ON DUPLICATE KEY UPDATE status=1, chg_time="${now}"`    
             
             await db.query('START TRANSACTION')
             await db.query(sql)

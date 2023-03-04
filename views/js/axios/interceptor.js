@@ -8,6 +8,16 @@ function qO(Nid){return document.querySelectorAll(Nid)}
 const hintModal = new bootstrap.Modal(i('hintModal'), {rootElement: document.body})
 const waitHintModal = new bootstrap.Modal(i('waitModal'))
 
+i('hintModal').addEventListener('hidden.bs.modal', e => {
+  i("hintModalHead").innerHTML = ""
+  i("hintModalBody").innerHTML = ""
+    i("toDo").classList.add("hidden")
+})
+
+i('waitModal').addEventListener('hidden.bs.modal', e => {
+  i("waitModalBody").innerHTML = ""
+})
+
 function waitModal(body){
   i("waitModalBody").innerHTML = body
   waitHintModal.show()
@@ -17,17 +27,29 @@ function waitModalClose(){
   i("waitModalClose").click()
   // waitHintModal.hide()
 }
-
+function valBtnSetModalShow(content){
+  i("toDo").disabled=true
+  i("toDo").classList.remove("hidden")
+  i("toDo").innerHTML = content
+  hintModal.show()
+  i('hintModal').addEventListener('hidden.bs.modal', event => {
+    i("toDo").classList.add("hidden")
+  })
+}
+function afterClick(){
+  i("toDo").disabled = true
+  setTimeout(function() {
+    i("toDo").disabled = false;
+  }, 3000); // 1000 毫秒 = 1 秒
+}
 function toDoSet(content, func){
   i("toDo").classList.remove("hidden")
   i("toDo").innerHTML = content
   i('hintModal').addEventListener('hidden.bs.modal', event => {
     i("toDo").classList.add("hidden")
   })
-  i("toDo").addEventListener("click", function(){
-      func()
-  })
 }
+
 
 function bodyToDoModal(body, toDoContent, func){
   i("hintModalHead").innerHTML = ""
