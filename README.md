@@ -1,6 +1,9 @@
-# 有你真好志願服務系統 grateful_to_have_you
+# grateful_to_have_you
+<img width="360"  src="https://user-images.githubusercontent.com/113272096/222933504-c94a3959-6a74-49fe-9092-640ebb3d2088.png">
 
+  
 本系統以志工單位實際需求建立各項功能，旨在輕鬆管理志工資料以及時數計算，並且可以根據不同組別設定管理權限。
+
 
 ## 功能特色
 
@@ -20,7 +23,7 @@
 - 新增帳號
 - 修改帳號
 - 設定權限
-- 
+
 ## 展示
 網址：https://xinyu.site/
 
@@ -36,6 +39,7 @@
 - 資料庫：RDS MySQL
 - 雲端服務：EC2、S3、CloudFront
 - 網路：HTTP & HTTPS、SSL、NGINX、DNS (Route 53)
+- 主要套件：aws-sdk、bcrypt、cookie-parser、jsonwebtoken、joi、moment
 ### 前端使用套件
 - axios
 - bootstrap
