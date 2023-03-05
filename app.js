@@ -3,7 +3,6 @@ const app = express();
 const path = require("path");
 const morgan = require("morgan");
 app.use(morgan("dev"));
-const bcrypt = require("bcrypt");
 
 // 設定檔案位置
 app.set("views", path.join(__dirname, "/views/html"));
