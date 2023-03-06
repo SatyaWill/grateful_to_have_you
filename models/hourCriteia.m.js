@@ -1,6 +1,6 @@
 const db = require("../config/db")
 const moment = require("moment")
-const now = moment().format("YYYY-MM-DD HH:mm:ss").toString()
+const now = moment().utcOffset(480).format("YYYY-MM-DD HH:mm:ss").toString()
 
 module.exports = {
     get: async (authId) => {

@@ -1,7 +1,7 @@
 const db = require("../config/db")
 const moment = require("moment")
-const today = moment().format("YYYYMMDD")-19110000
-const time = moment().format("HHmm").toString()
+const today = moment().utcOffset(480).format("YYYYMMDD")-19110000
+const time = moment().utcOffset(480).format("HHmm").toString()
 
 module.exports = {
     type: async (id) => {

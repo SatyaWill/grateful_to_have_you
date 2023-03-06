@@ -19,8 +19,11 @@
 **/npm-debug.log
 **/obj
 **/zign
+**/z_schema
 **/secrets.dev.yaml
 **/values.dev.yaml
 **/.rest
+db_schema.png
 LICENSE
 README.md
+**/.puml
