@@ -48,6 +48,9 @@ function toDoSet(content, func){
   i('hintModal').addEventListener('hidden.bs.modal', event => {
     i("toDo").classList.add("hidden")
   })
+  i("toDo").addEventListener("click", function(){
+    func()
+})
 }
 
 

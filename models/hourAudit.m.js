@@ -1,9 +1,9 @@
 const db = require("../config/db");
 const moment = require("moment");
-const thisMonth = moment().format("YYYYMM") - 191100;
-const lastMonth = moment().subtract(1, "month").format("YYYYMM") - 191100;
-const last2Month = moment().subtract(2, "month").format("YYYYMM") - 191100;
-const now = moment().format("YYYY-MM-DD HH:mm:ss").toString();
+const thisMonth = moment().utcOffset(480).format("YYYYMM") - 191100;
+const lastMonth = moment().utcOffset(480).subtract(1, "month").format("YYYYMM") - 191100;
+const last2Month = moment().utcOffset(480).subtract(2, "month").format("YYYYMM") - 191100;
+const now = moment().utcOffset(480).format('YYYY-MM-DD HH:mm:ss').toString();
 
 module.exports = {
     count: async (authId, isOver, m) => {
@@ -57,8 +57,8 @@ module.exports = {
   },
   batchEdit: async (id, d) => {
     try {
-      const sql = `UPDATE audit_hours SET 
-                audit_hours = ?, note = ? , agent_id=? WHERE checkin_id IN (${d.ids.join()})`;
+      const sql = `UPDATE checkin SET 
+                audit_hours = ?, note = ? , agent_id=? WHERE id IN (${d.ids.join()})`;
       const res = await db.query(sql, [d.hours, d.note, id]);
       if (res[0].affectedRows) return { message: "ok" };
       throw new Error("No rows affected");
@@ -102,32 +102,38 @@ module.exports = {
                 record_id = ? + FIND_IN_SET(id, "${d.ids.join()}")-1, 
                 audit_status = 'Y', over_time='${now}'
             WHERE id IN (${d.ids.join()})`;
-    let res;
-    let retries = 3;
-    while (retries > 0) {
-      try {
-        await db.query("START TRANSACTION");
-        if (d.invalidIds.length) {
-          await db.query(sql0);
+    try {
+      if (d.invalidIds.length) {
+        [res] = await db.query(sql0);
+        if (res && res.affectedRows === d.invalidIds.length) {
+          return { message: "ok" };
+        } else {
+          throw new Error("無法更新全部");
         }
-        const [r] = await db.query(sql1);
-        const recordId = r.insertId || 0;
-        res = await db.query(sql2, [recordId]);
-        await db.query("COMMIT");
-        break;
-      } catch (err) {
-        await db.query("ROLLBACK");
-        retries--;
-        console.error(err);
-        if (retries === 0) {
-          throw err;
+      } else {
+        let res;
+        let retries = 3;
+        while (retries > 0) {
+          await db.query("START TRANSACTION");
+          const [r] = await db.query(sql1);
+          const recordId = r.insertId || 0;
+          res = await db.query(sql2, [recordId]);
+          await db.query("COMMIT");
+          if (res && res[0].affectedRows === d.ids.length) {
+            return { message: "ok" };
+          }
+          retries--;
+          console.log(`Retrying transaction, ${retries} retries left`);
+          await new Promise((resolve) => setTimeout(resolve, 1000));
         }
-        console.log(`Retrying transaction, ${retries} retries left`);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        throw new Error("無法更新全部");
       }
+    } catch (err) {
+      await db.query("ROLLBACK");
+      console.error(err);
+      throw err;
     }
-    if (res && res[0].affectedRows === d.ids.length) return { message: "ok" };
-    throw new Error("無法更新全部");
+
   },
   // newRecord: async (id, d) => {
   //   try {

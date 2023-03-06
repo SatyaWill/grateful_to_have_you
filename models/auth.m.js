@@ -1,7 +1,7 @@
 const db = require("../config/db")
 const bcrypt = require('bcrypt');
 const moment = require("moment");
-const now = moment().format("YYYY-MM-DD HH:mm:ss").toString();
+const now = moment().utcOffset(480).format("YYYY-MM-DD HH:mm:ss").toString();
 
 console.log(now);
 module.exports = {

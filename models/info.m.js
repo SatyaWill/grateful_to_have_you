@@ -1,8 +1,8 @@
 const db = require("../config/db")
 const moment = require("moment")
-const today = moment().format("YYYYMMDD")-19110000
-const thisYear = moment().format("YYYY")-1911
-const now = moment().format("YYYY-MM-DD HH:mm:ss").toString()
+const today = moment().utcOffset(480).format("YYYYMMDD")-19110000
+const thisYear = moment().utcOffset(480).format("YYYY")-1911
+const now = moment().utcOffset(480).format("YYYY-MM-DD HH:mm:ss").toString()
 const url = `https://d3r92fcxan8msh.cloudfront.net/`
 
 module.exports = {

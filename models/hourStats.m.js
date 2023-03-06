@@ -1,6 +1,6 @@
 const db = require("../config/db");
 const moment = require("moment");
-const thisYear = moment().format("YYYY") - 1911;
+const thisYear = moment().utcOffset(480).format("YYYY") - 1911;
 
 module.exports = {
     years: async (year, group) => {

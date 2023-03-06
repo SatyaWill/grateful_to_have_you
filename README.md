@@ -1,4 +1,4 @@
-# grateful_to_have_you
+# grateful to have you
 <img width="360"  src="https://user-images.githubusercontent.com/113272096/222933504-c94a3959-6a74-49fe-9092-640ebb3d2088.png">
 
   
@@ -35,15 +35,25 @@
 
 ## 技術架構
 ### 後端技術
-- 開發環境：Node.js/Express.js
-- 資料庫：RDS MySQL
-- 雲端服務：EC2、S3、CloudFront
-- 網路：HTTP & HTTPS、SSL、NGINX、DNS (Route 53)
+- Node.js/Express.js
+- RDS MySQL
+- EC2、S3、CloudFront、Route 53
+- Docker、SSL、NGINX、JSON Web Token(JWT)
 - 主要套件：aws-sdk、bcrypt、cookie-parser、jsonwebtoken、joi、moment
+- 其他應用：MVC 架構、資料庫第三正規化
 ### 前端使用套件
 - axios
 - bootstrap
 - datatable
-### 其他
-- 使用 MVC 架構
-- 資料庫正規化
+## 資料庫架構
+![image](z_schema/db_schema.png)
+## 簽到(退)流程
+![image](z_schema/checkin.png)
+## 時數審核流程
+![image](z_schema/audit.png)
+![image](z_schema/audit_over.png)
+
+## 聯絡
+👩‍💻陳心渝 Xinyu Chen
+📬Email: imxinyu@hotmail.com
+
