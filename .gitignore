@@ -3,6 +3,8 @@ node_modules
 .devcontainer
 .vscode
 
+puml
+temp
 zign
 
 req.rest

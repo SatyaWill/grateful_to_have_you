@@ -133,34 +133,5 @@ module.exports = {
       console.error(err);
       throw err;
     }
-
   },
-  // newRecord: async (id, d) => {
-  //   try {
-  //     const sql = `UPDATE criteria SET
-  //           start_time=?, end_time=?, is_active=?, 
-  //           editor_id=?, chg_time=?  WHERE id=?`;
-  //     const val = [d.start_time, d.end_time, d.is_active, id, now, d.id];
-  //     const res = await db.query(sql, val);
-  //     if (res[0].affectedRows) return { message: "ok" };
-  //     throw new Error("No rows affected");
-  //   } catch (err) {
-  //     console.error(err);
-  //     return err;
-  //   }
-  // },
-  // editRecord: async (id, d) => {
-  //   try {
-  //     const sql = `UPDATE criteria SET
-  //           start_time=?, end_time=?, is_active=?, 
-  //           editor_id=?, chg_time=?  WHERE id=?`;
-  //     const val = [d.start_time, d.end_time, d.is_active, id, now, d.id];
-  //     const res = await db.query(sql, val);
-  //     if (res[0].affectedRows) return { message: "ok" };
-  //     throw new Error("No rows affected");
-  //   } catch (err) {
-  //     console.error(err);
-  //     return err;
-  //   }
-  // },
 };

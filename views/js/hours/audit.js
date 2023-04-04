@@ -36,7 +36,7 @@ i("tableForm").addEventListener("change", function(e){
     if (e.target.name==="hours") return  e.target.value = Math.round(e.target.value * 2) / 2
 })
 
-function loadTableData(isAuditOver, month, group, ) {
+function loadTableData(isAuditOver, month, group) {
 const TB = $("#hoursAudit").DataTable({
         columnDefs: [ { className: "control", targets: 0 } ],
         select: true,
@@ -53,7 +53,8 @@ const TB = $("#hoursAudit").DataTable({
                 Authorization: `Bearer ${window.localStorage.getItem("accessToken")}`,
             },
             error: function (xhr, error, thrown) {
-                if (xhr.status === 401) return refreshToken(xhr.config);
+                if (xhr.status === 401) 
+                return refreshToken(TB, ()=> loadTableData(isAuditOver, month, group));
             },
         },
         dom:

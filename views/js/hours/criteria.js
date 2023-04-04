@@ -1,100 +1,87 @@
 // 區塊一：標準設定 =========================================================
+$(hoursCriteria);
 let oldData = []
-const criteriaTable = $('#hoursCriteria').dataTable({
-    columnDefs: [ 
-    {className: 'control',
-    //   orderable: true,
-      targets:   1
-  } 
-   ],
-    autoWidth: true,
-    processing: 10,
-    language: datatableLang,
-    responsive: {
-        details: {
-            type: "column",
-            target: 1
-        },
-    }, //頁面變窄之後出現展開結果按鈕
-    deferLoading: true, //載入時不執行查詢
-    ajax: {
-        url: "/vol/hourCriteria",
-        headers: {
-            contentType : "application/json; charset=utf-8",
-            Accept: "application/json",
-            Authorization: `Bearer ${window.localStorage.getItem("accessToken")}`,
-        },
-        dataSrc: function (json) {
-            oldData = json.data;
-            return json.data;
-        },
-        error: function (xhr, error, thrown) {
-            if (xhr.status === 401) return refreshToken(xhr.config)
-        }
-    },
-    dom:
-    "<'row'" + "<'#formWrapper.col ' >" +// 全選 "<'row'<'col-sm-6'B>"
-    "<'col-sm-4 'f>>" +
-    "<'row'<'col-sm-12'tr>>" + // 主表
-    "<'row'>", //顯示幾頁 第幾頁 "<'row'<'col-sm-5'i><'col-sm-7'p>>"
-    columns: [
-    {
-        data: null,
-        className: "text-center align-middle",
-        render: function (data, type, row) {
-                var btn = 
-                `<div class="btn btn-secondary bg-gradient btn-sm shadow-sm cedit_btn"
-                onclick='editCriteria("${row.id}", "${row.group_name}", 
-                    "${row.group_id+row.subgroup}", "${row.name}", "${row.is_active}", 
-                    "${row.start_time}","${row.end_time}")'>編輯</div>`
-            return btn;
+function hoursCriteria(){
+    const TB = $('#hoursCriteria').DataTable({
+        columnDefs: [ 
+        {className: 'control',
+        //   orderable: true,
+          targets:   1
+      } 
+       ],
+        autoWidth: true,
+        processing: 10,
+        language: datatableLang,
+        responsive: {
+            details: {
+                type: "column",
+                target: 1
+            },
+        }, //頁面變窄之後出現展開結果按鈕
+        deferLoading: true, //載入時不執行查詢
+        ajax: {
+            url: "/vol/hourCriteria",
+            headers: {
+                contentType : "application/json; charset=utf-8",
+                Accept: "application/json",
+                Authorization: `Bearer ${window.localStorage.getItem("accessToken")}`,
+            },
+            dataSrc: function (json) {
+                oldData = json.data;
+                return json.data;
+            },
+            error: function (xhr, error, thrown) {
+                if (xhr.status === 401) return refreshToken(TB, ()=> hoursCriteria());
             },
         },
-      {
-        data: null,
-        tittle: "",
-        orderable: false,
-        defaultContent: "",
-        width: "3%",
-      },
-      { data: "id", className: "f14cm"},
-      { data: {group_id: "group_id",subgroup: "subgroup", group_name: "group_name"}, 
-        className: "f14cm",
-        render: function (data, type, row) {
-            return  data.group_name
-        },
-      },
-      { data: "name", className: "f14cm" },
-      { data: {start_time: "start_time",end_time: "end_time"}, className: "f14cm",
-        render: function (data, type, row) {
-            return  data.start_time +"~"+ data.end_time
-        },
-      },
-      { data: "is_active", className: "f14cm",
-        render: function (data, type, row) {
-            return  data === "Y" ? "使用中" : "暫停"
-        },
-      },
-      { data: "handler_name" , className: "f14cm" },
-      { data: "handle_time" , className: "f14cm" },
-    ],
-  });
-  
+        dom:
+        "<'row'>" + // 全選 "<'row'<'col-sm-6'B>"
+        "<'row'<'col-sm-12'tr>>" + // 主表
+        "<'row'>", //顯示幾頁 第幾頁 "<'row'<'col-sm-5'i><'col-sm-7'p>>"
+        columns: [
+        {
+            data: null,
+            className: "text-center align-middle",
+            render: function (data, type, row) {
+                    var btn = 
+                    `<div class="btn btn-secondary bg-gradient btn-sm shadow-sm cedit_btn"
+                    onclick='editCriteria("${row.id}", "${row.group_name}", 
+                        "${row.group_id+row.subgroup}", "${row.name}", "${row.is_active}", 
+                        "${row.start_time}","${row.end_time}")'>編輯</div>`
+                return btn;
+                },
+            },
+          {
+            data: null,
+            tittle: "",
+            orderable: false,
+            defaultContent: "",
+            width: "3%",
+          },
+          { data: "id", className: "f14cm"},
+          { data: {group_id: "group_id",subgroup: "subgroup", group_name: "group_name"}, 
+            className: "f14cm",
+            render: function (data, type, row) {
+                return  data.group_name
+            },
+          },
+          { data: "name", className: "f14cm" },
+          { data: {start_time: "start_time",end_time: "end_time"}, className: "f14cm",
+            render: function (data, type, row) {
+                return  data.start_time +"~"+ data.end_time
+            },
+          },
+          { data: "is_active", className: "f14cm",
+            render: function (data, type, row) {
+                return  data === "Y" ? "使用中" : "暫停"
+            },
+          },
+          { data: "handler_name" , className: "f14cm" },
+          { data: "handle_time" , className: "f14cm" },
+        ],
+      });
+}
 
-// 標準新增表單 ===========================================================
-i("formWrapper").innerHTML = `
-<form class="input-group audit_selector" id="criteriaForm">
-    <select class="form-select groupSelector" aria-label="Example select with button addon" 
-    id="c_group" name="group"></select>
-    <input type="text" class="form-control" placeholder="名稱" id="c_name" name="name">
-    <input type="number" class="form-control" placeholder="開始時間" aria-label="start_time"
-    data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="格式為hhmm 4位數字"
-    id="start_time" name="start_time">
-    <input type="number" class="form-control" placeholder="結束時間" aria-label="end_time"
-    data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="格式為hhmm 4位數字"
-    id="end_time" name="end_time">
-    <button class="btn btn-secondary" type="button" id="addCriteria" disabled>新增標準</button>
-</form>`
 
 // 根據使用者權限顯示對應的部門和組別=======================================
 qO(".groupSelector").forEach(i=>{

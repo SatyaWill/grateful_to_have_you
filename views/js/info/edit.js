@@ -41,9 +41,20 @@ async function getPageInfo() {
                 i("picPreview").style.backgroundImage = `url(${res.id_photo})`;
             }
             if (res.book_pic) {
-                i("v_book_picUrl").innerHTML = `
-                <a href="${res.book_pic}">${res.name}-紀錄冊.jpg</a>`
-            }
+                const a = document.createElement('a');
+                a.innerHTML = `${res.name}-紀錄冊.jpg`;
+                a.addEventListener('click', async () => {
+                    if (!a.href.includes('blob')) {
+                        const response = await fetch(res.book_pic);
+                        const blob = await response.blob();
+                        const url = URL.createObjectURL(blob);
+                        a.href = url;
+                        a.download = `${res.name}-紀錄冊.jpg`;
+                    }
+                });
+                i("v_book_picUrl").appendChild(a);
+            }           
+              
             // 複選框處理
             arrayToCkeck(groupList, "");
             arrayToCkeck(leaderGroup, "L");
@@ -141,13 +152,13 @@ async function sendEditData(){
         rmVice,
     }
     waitModal(`<h5>資料處理中，請稍候。</h5>`)
-    const bookPic = await getPicName("v_book_pic", "book")
-    const idPhoto = await getPicName("v_id_photo", "idPhoto")
-    if ( bookPic ) {
-        editedVolData["book_Pic"] = bookPic;
+    const book_pic = await getPicName("v_book_pic", "book")
+    const id_photo = await getPicName("v_id_photo", "idPhoto")
+    if ( book_pic ) {
+        editedVolData["book_pic"] = book_pic;
     }
-    if ( idPhoto ) {
-        editedVolData["id_photo"] = idPhoto;
+    if ( id_photo ) {
+        editedVolData["id_photo"] = id_photo;
     }
     const resp = await infoAPI.editVol({ ...editedVolData, ...groupData });
     const res = await resp.data

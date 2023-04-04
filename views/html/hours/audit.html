@@ -10,6 +10,18 @@
             <i class="bi bi-arrow-down-square"></i>志工簽退完成時，系統會依此計算時數。預設「起訖時間相減，以0.5小時(± 15分鐘)為單位」。           
         </div>
         <div class="accordion-body" >
+            <form class="input-group audit_selector" id="criteriaForm">
+                <select class="form-select groupSelector" aria-label="Example select with button addon" 
+                id="c_group" name="group"></select>
+                <input type="text" class="form-control" placeholder="名稱" id="c_name" name="name">
+                <input type="number" class="form-control" placeholder="開始時間" aria-label="start_time"
+                data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="格式為hhmm 4位數字"
+                id="start_time" name="start_time">
+                <input type="number" class="form-control" placeholder="結束時間" aria-label="end_time"
+                data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="格式為hhmm 4位數字"
+                id="end_time" name="end_time">
+                <button class="btn btn-secondary" type="button" id="addCriteria" disabled>新增標準</button>
+            </form>
             <!-- 表格 -->
             <table id="hoursCriteria" class="table table-bordered table-striped nowrap dt-responsive collapsed table-hover custom-tb" 
             role="grid" aria-controls="hoursCriteria" style="width:100%">

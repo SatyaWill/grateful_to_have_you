@@ -67,6 +67,10 @@ async function getUserInfo(){
     localStorage.setItem('userInfo', userInfoStr)
 }
 
+function accessToken(){
+    return window.localStorage.getItem("accessToken")
+}
+
 function localUserInfo(){
     return JSON.parse(localStorage.getItem('userInfo'))
 }
@@ -119,8 +123,9 @@ function toPage(name){
         el.classList.remove("itemActive")
         el.getElementsByTagName("h6")[0].classList.remove("h6Active")
     })
-    i("i"+path).classList.add("itemActive")
-    i("i"+path).getElementsByTagName("h6")[0].classList.add("h6Active")
+    // console.log(i("i"+path));
+    // i("i"+path).classList.add("itemActive")
+    // i("i"+path).getElementsByTagName("h6")[0].classList.add("h6Active")
     })
 }
 

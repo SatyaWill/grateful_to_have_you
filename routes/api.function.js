@@ -8,13 +8,6 @@ const hourAuditCtrl = require("../controllers/hourAudit.c")
 const hourStatsCtrl = require("../controllers/hourStats.c")
 router.use(authMiddleware)
 router.post('/info', infoCtrl.info)
-// router.post('/infoExcel', infoCtrl.infoExcel)
-/* 目前暫時用code建，要改的地方:
-資料庫建sector表、改subgroup表、前端API info vol.js檔 後端mc檔
-設計先從redis撈？待研究
-*/
-// router.get('/infoSectorGroup', infoCtrl.infoSectorGroup)
-// router.get('/volGroup', infoCtrl.volGroup)
 router.post('/volId', infoCtrl.volId)
 router.get('/picUrl', infoCtrl.picUrl)
 router.post('/newVol', infoCtrl.newVol)

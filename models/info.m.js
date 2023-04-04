@@ -54,47 +54,29 @@ module.exports = {
             return e
         }
     },
-    // infoExcel: async (authId, d) => {
-    //     try {
-    //         let sqlParm, sqlParmC, sqlParmG, sqlValue = generateSqlParm(d)
-
-    //         const res = await db.query(sql, sqlValue)
-
-    //         return res
-    //     }catch(e){
-    //         console.error(e)
-    //         return e
-    //     }
-    // },
     volId: async (d) => {
         try {
             //  函式： item為項目，parm為sql where後的參數指令，value為參數值
             const id_num = d.id_num==="A100000000" ? "" : d.id_num
             const birthday = d.birthday==="0010101" ? "" : d.birthday
-            let sqlParm = ""
-            let sqlValue = [d.name, d.gender]
-            sqlItem(id_num, "id_num=?")
-            sqlItem(birthday, "birthday=?")  
-            function sqlItem(item, parm, value=item){
-                if (item === "" ) return
-                sqlParm += ` AND ${parm}`
-                sqlValue.push(value)
-            } 
+            const desc = id_num ? `id_num = '${id_num}'` : 
+            `(? = "" OR birthday = ?) AND INSTR(name, ?) AND gender=? ORDER BY birthday`
             const sql = `
             SELECT vol_id, name, birthday, 
             IF(status="Y", "收編", "離隊") status
-            FROM vol WHERE
-            INSTR(name, ?) AND gender=? ${sqlParm}
-            ORDER BY birthday`
-            const data = await db.query(sql, sqlValue)
-            const res = await db.query("SELECT MAX(vol_id) id from vol")
-            const lastVolId = res[0][0].id
-            const newVolId = lastVolId.toString().substr(0,3) < thisYear ? 
-                            `${thisYear}001` : lastVolId+1
-            const status = id_num && data[0].length ? 0 : 
-                            !id_num && data[0].length ? 1 : 2          
-            // 0 已有勿加 1 有找到相符資料，請確認 2 沒有找到相符資料
-            return {status: status, data: data[0], newVolId: newVolId}
+            FROM vol
+            WHERE ${desc}`
+            const data = await db.query(sql, id_num ? "" : [birthday, birthday, d.name, d.gender])
+            const status = data[0].length ? (id_num ? 0 : 1) : 2   
+            // 0 已有勿加 1 有找到相符資料，請確認 2 沒有找到相符資料 
+            let newVolId = 0
+            if (status) {
+                const res = await db.query("SELECT MAX(vol_id) id from vol")
+                const lastId = res[0][0].id
+                newVolId = lastId.toString().substr(0,3) < thisYear ? 
+                           `${thisYear}001` : lastId + 1
+            }
+            return {status, data: data[0], newVolId}
         }catch(e){
             console.error(e)
             return e
@@ -105,11 +87,11 @@ module.exports = {
         const id_num = d.id_num ==="A100000000" ? null : d.id_num
         const password = id_num === null ? "" : id_num
         const birthday = d.birthday ==="0010101" ? "" : d.birthday
-        const book_Pic = d.book_Pic ? url+"book/"+d.book_Pic : ""
+        const book_pic = d.book_pic ? url+"book/"+d.book_pic : ""
         const id_photo = d.id_photo ? url+"idPhoto/"+d.id_photo : ""
         const sqlValue = [
             d.vol_id, d.name, d.gender, id_num, password, 
-            birthday,Number(d.has_book),d.issue_date, book_Pic, id_photo, 
+            birthday,Number(d.has_book),d.issue_date, book_pic, id_photo, 
             d.education, d.school, d.job_category, d.job, d.address, 
             d.tel, d.mobile, d.note, d.join_date, d.quit_date, d.status, id]
         const sql = `INSERT vol 
@@ -248,7 +230,7 @@ module.exports = {
         function sqlItem(item, parm, value=item){
             if (item) return sqlParm += `,${parm}="${value}"`
         } 
-        sqlItem(d.book_Pic,"book_pic", url+"book/"+d.book_Pic)
+        sqlItem(d.book_pic,"book_pic", url+"book/"+d.book_pic)
         sqlItem(d.id_photo, "id_photo", url+"idPhoto/"+d.id_photo)
         sqlItem(d.vol_id, "vol_id")
         sqlItem(d.name, "name")
@@ -374,8 +356,6 @@ module.exports = {
 }
 
 function generateSqlParm(d){
-    console.log(d.joinYS);
-    // const hasGroup = [d.sector, d.group, d.member].some(v => (v !== ""))
     // sqlparm為sql where status=後的變數，sqlValue為變數值
     //  函式： item為項目，parm為sql where後的參數指令，value為參數值
     let sqlParm = d.status === "Y" ? `"Y"` : `"N"`

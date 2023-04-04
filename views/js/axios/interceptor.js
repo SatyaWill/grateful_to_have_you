@@ -100,39 +100,31 @@ const authAxios = axios.create({
   withCredentials: true,
   timeout: 30000,
 })
-const updateToken = (token) => {
-    localStorage.setItem("accessToken", token)
-    authAxios.defaults.headers.common["Authorization"] = `Bearer ${token}`
-}
-
-async function refreshToken(originalRequest) { // 給datatable ajax用
+const refreshToken = async (TB, callback) => { // 給datatable ajax用
   try {
     const res = await authAxios.post('/auth/refresh');
-    localStorage.setItem('accessToken', res.data.accessToken);
-    originalRequest.headers.Authorization = 'Bearer ' + res.data.accessToken
-    return axios(originalRequest)
+    localStorage.setItem("accessToken", res.data.accessToken)
+    if (TB) {
+      TB.clear();
+      TB.destroy();
+    }
+    callback();
   } catch (error) {
     console.error(error);
     removeToken()
-    bodyModal(`<h5>${err.response.status}: 作業逾時或無相關使用授權，請重新登入</h5>`)
+    bodyModal(`<h5>${error.response.status}: 作業逾時或無相關使用授權，請重新登入</h5>`)
     i('hintModal').addEventListener('hidden.bs.modal', e => {
       window.location.href = '/admin/login'
     })
     return Promise.reject(error)
   }
-}
+};
 
 const removeToken = () => {
   localStorage.removeItem('accessToken');
   localStorage.removeItem('userInfo');
   authAxios.defaults.headers.common['Authorization'] = ''
 };
-
-authAxios.interceptors.request.use(async function (config) {
-  return config
-}, function (error) {
-  return Promise.reject(error)
-})
 
 authAxios.interceptors.response.use(function (response) {
   return response
@@ -212,27 +204,6 @@ authAxios.interceptors.response.use(function (response) {
       })
     }  
   }
-
   return Promise.reject(error)
 })
 
-
-
-/*
-authAxios.interceptors.response.use(null, async (error) => {
-  const { response } = error
-  if (response && response.status === 401) {
-    const refreshUrl = `/auth/refresh`
-    if (error.config.url !== refreshUrl) {
-      const originalRequest = error.config
-      const resp = await axios.post(refreshUrl)
-      const accessToken = resp.data.accessToken
-      updateToken(accessToken)
-      console.log("換好");
-      return axios(originalRequest)
-    }else{
-      removeToken()
-      window.location.href = '/admin/login'
-    }
-  }
-})*/

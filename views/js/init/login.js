@@ -10,7 +10,7 @@ i("loginForm").addEventListener("submit", async (e)=>{
         e.preventDefault()
         const resp = await authAPI.login(i("loginID").value, i("loginPW").value)
         const res = await resp.data
-        if (await resp.status===200) {
+        if (resp.status===200) {
             localStorage.setItem("accessToken", res.accessToken)
             localStorage.setItem('userInfo', JSON.stringify(res.userInfo))
             location.href = "/admin/board"

@@ -108,7 +108,7 @@ module.exports = {
       status: joi.string().regex(RE.status).optional(),
       join_date: joi.string().regex(RE.date).optional(),
       quit_date: joi.string().regex(RE.date).allow("").optional(),
-      book_Pic: joi.string().max(100).allow("").optional(),
+      book_pic: joi.string().max(100).allow("").optional(),
       id_photo: joi.string().max(100).allow("").optional(),
       addGroupId: joi.array().items(joi.string()).default([]),
       addLeader: joi.array().items(joi.string()).default([]),
