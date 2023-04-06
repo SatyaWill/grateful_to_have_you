@@ -20,7 +20,7 @@ $(document).ready(function() {
                 return json.data;
             },
             error: function (xhr, error, thrown) {
-                if (xhr.status === 401) return refreshToken(xhr.config);
+                if (xhr.status === 401) return refreshToken(this);
             },
         },
         dom:
@@ -97,7 +97,6 @@ async function editAgent(tb){
         const ns = (d.name === name && d.status === status)
         const isSame = d.id!=="public" ? ns : ns && password===""
         const invalid = !RE.name.test(name)
-        // const msg = !name ? "名稱未填寫" : invalid ? "名稱需二字以上" : "資料未修改" 
         i("toDo").disabled = !name || invalid || isSame
         const data = { id: d.id, name, status, password }
         i("toDo").addEventListener("click", function(){
@@ -200,7 +199,17 @@ function authModalContent(authIds){
 }
 
 function authCheckboxCtrl(){ // Model checkbox選取控制====================================
-
+    i('authList').addEventListener("change", e=>{
+        const ids = authList.map(d => d.id)
+        const id = e.target.id
+        const isChecked = e.target.checked
+        ids.forEach(c => {
+            if ( (id === c.substr(0,1) && c.length===2) || (id ==='All' && c!=='All')) {
+                i(c).disabled = isChecked
+                if (i(c).checked && i(c).disabled) i(c).checked = false
+            } 
+        });
+    })
 }
 
 function newAgentModalContent(){

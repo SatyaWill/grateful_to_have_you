@@ -1,59 +1,107 @@
-# grateful to have you
+# Grateful to have you
 <img width="360"  src="https://user-images.githubusercontent.com/113272096/222933504-c94a3959-6a74-49fe-9092-640ebb3d2088.png">
 
+The project facilitates volunteer and data management with Role-Based Access Control (RBAC) to ensure proper user access levels. It offers a user-friendly interface for managing volunteers and their data.
+
+🌏 https://vol.xinyu.site/
+📢 Disclaimer: Demo data is randomly generated and should not be used for any real-world applications.
+👤 Demo Accounts (User ID and password are identical) 
+
+|  Role  |  User ID  |
+| ----  | ----  |
+|  Administrator  |  admin  |
+| Agent Manager  | AAA |
+| Agent  | DDD  |
+| Public for Check-in  | public  |
+
+Table of Contents
+---
+  - [Demo for Main Features](#demo-for-main-features)
+  - [Technologies](#technologies)
+    - [Backend](#backend)
+    - [Frontend](#frontend)
+  - [Architecture](#architecture)
+  - [Database Schema](#database-schema)
+  - [Transaction Flowchart (Hours Audit)](#transaction-flowchart-hours-audit)
+  - [Contact](#contact)
+
+Demo for Main Features
+---
+![image](readme_pic/0_init.png)
+
+- Volunteer data management:  multi-condition composite query, add/edit data, photo management
+  ![image](readme_pic/1.1_query.png)
+  ![image](readme_pic/1.2_edit.png)
+- Hour management: online check-in, customize criteria for group audit
+  ![image](readme_pic/2_audit.png)
+- Hour stats: volunteer year-by-year, group and annual
+- Authority management: add/modify account, set permissions
+![image](readme_pic/3,4_stats,auth.png)
+
+
+Technologies
+---
+### Backend
+- Node.js / Express.js
+- Docker
+- NGINX
+- CloudFare
+  - DNS records, SSL
+- AWS
+  - EC2
+  - RDS MySQL, ElastiCache Redis
+  - S3, CloudFront
+- MVC architecture
+- JWT-based authorization
+  - Access token is automatically refreshed using Axios-interceptors and refresh token before expiration
+  - Refresh token is removed from Redis on logout
+- Database with 3NF schema, indexing, function, store procedure, and transaction support, prevent SQL injection attacks with parameterized queries
+- Role-Based Access Control (RBAC)
+- Security HTTP Header (Enhance application security with NGINX and helmet)
+
+### Frontend
+- HTML, CSS, Javascript, RWD
+- Axios, Ajax
+- Bootstrap
+- Datatable
+
+Architecture
+---
+- Backend: Node.js / Express.js, using NGINX reverse proxy on AWS EC2 with Docker
+- ElastiCache Redis: for storing refresh tokens
+- RDS MySQL: for storing application data
+- S3 / CloudFront: for storing and accelerating volunteer images
   
-本系統以志工單位實際需求建立各項功能，旨在輕鬆管理志工資料以及時數計算，並且可以根據不同組別設定管理權限。
+![image](readme_pic/Architecture.png)
 
+Database Schema
+---
+- Volunteer: `vol`
+- Volunteer insurance policy: `policy`,`insurer`,`vol_policy`
+- Group:
+  - `group_name`,`subgroup`: groups can have none or several subgroups
+  - `vol_group`: volunteer can join one or many groups
+  - `vol_leader`: each group has leader and vice-leader
+- Authority:
+  - `agent`: include administrator, agent manager, agent, public
+    > ```Reserved for future expansion to provide volunteer login, the term "agent" is used to distinguish from volunteer accounts.```
+  - `auth`: defines authority areas, including sector (manager level), group (agent level) and check-in (public level)
+  - `agent_auth`: agent can have several authorities
+- Hour records: 
+  - `checkin`: volunteer clock in/out record, preserved for 3 years
+  - `criteria`: agent can customize criteria for check-in hour audits; if not set, default criteria is used
+  - `audit_hours`: agent audit check-in hours
+  - `record`:  integrated from `checkin` and `audit_hours` after audit is finished
+  
+![image](readme_pic/db_schema.png)
 
-## 功能特色
+## Transaction Flowchart (Hours Audit)
+- Transactions ensure ACID properties of data: Atomicity, Consistency, Isolation, and Durability
+- Inserting a new `record` requires updating related information in `audit_hours` and the audit_status in `checkin`
+- Resource contention may result in a deadlock, requiring up to 3 retries with a 1-second interval
 
-### 志工基本資料管理
-- 多條件複合查詢
-- 分權分組管理
-- 新增、編輯志工資料
-- 志工照片管理
-### 時數管理
-- 線上簽到(退)
-- 自訂審查標準
-- 分組審查時數
-### 時數統計
-- 依志工歷年統計
-- 依組別及年度統計
-### 權限管理
-- 新增帳號
-- 修改帳號
-- 設定權限
-
-## 展示
-網址：https://xinyu.site/
-
-展示帳號：
-- 管理者admin（密碼相同）
-- 主管AAA（密碼相同）
-- 組長DDD（密碼相同）
-- 簽到public（密碼相同）
-
-## 技術架構
-### 後端技術
-- Node.js/Express.js
-- RDS MySQL
-- EC2、S3、CloudFront、Route 53
-- Docker、SSL、NGINX、JSON Web Token(JWT)
-- 主要套件：aws-sdk、bcrypt、cookie-parser、jsonwebtoken、joi、moment
-- 其他應用：MVC 架構、資料庫第三正規化
-### 前端使用套件
-- axios
-- bootstrap
-- datatable
-## 資料庫架構
-![image](z_schema/db_schema.png)
-## 簽到(退)流程
-![image](z_schema/checkin.png)
-## 時數審核流程
-![image](z_schema/audit.png)
-![image](z_schema/audit_over.png)
-
-## 聯絡
-👩‍💻陳心渝 Xinyu Chen
-📬Email: imxinyu@hotmail.com
+![image](readme_pic/audit_transaction.png)
+## Contact
+👩‍💻 陳心渝 SINYU-YU CHEN  
+📧 imxinyu@hotmail.com
 

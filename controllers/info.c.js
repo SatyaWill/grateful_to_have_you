@@ -13,15 +13,6 @@ module.exports = {
       return res.status(500).json({ message: "伺服器內部錯誤" });
     }
   },
-  // infoExcel: async (req, res) => {
-  //   try {
-  //     const resp = await infoModel.info(req.user.authId, req.body);
-  //     return res.status(200).json(resp);
-  //   } catch (e) {
-  //     console.log(e);
-  //     return res.status(500).json({ message: "伺服器內部錯誤" });
-  //   }
-  // },
   volId: async (req, res) => {
     const { error } = validate.volId(req.body);
     if (error) return res.status(400).json({ message: error.details[0].message })

@@ -3,33 +3,11 @@ const moment = require("moment");
 const thisYear = moment().utcOffset(480).format("YYYY") - 1911;
 
 module.exports = {
-    years: async (year, group) => {
+    years: async (volId) => {
         try {
-          const month = m === "L" ? lastMonth : m === "L2" ? last2Month : thisMonth;
-          const auth = authId.map(value => `${value}`).join('|');
-          const param = auth==="All" ? "" : `AND A.group_id REGEXP '^(${auth})'`
-          const sql = `
-          SELECT record.vol_id, vol.name,
-              SUM(CASE WHEN substr(date, 4, 2) = '01' THEN hrs ELSE 0 END) AS 'Jan',
-              SUM(CASE WHEN substr(date, 4, 2) = '02' THEN hrs ELSE 0 END) AS 'Feb',
-              SUM(CASE WHEN substr(date, 4, 2) = '03' THEN hrs ELSE 0 END) AS 'Mar',
-              SUM(CASE WHEN substr(date, 4, 2) = '04' THEN hrs ELSE 0 END) AS 'Apr',
-              SUM(CASE WHEN substr(date, 4, 2) = '05' THEN hrs ELSE 0 END) AS 'May',
-              SUM(CASE WHEN substr(date, 4, 2) = '06' THEN hrs ELSE 0 END) AS 'Jun',
-              SUM(CASE WHEN substr(date, 4, 2) = '07' THEN hrs ELSE 0 END) AS 'Jul',
-              SUM(CASE WHEN substr(date, 4, 2) = '08' THEN hrs ELSE 0 END) AS 'Aug',
-              SUM(CASE WHEN substr(date, 4, 2) = '09' THEN hrs ELSE 0 END) AS 'Sep',
-              SUM(CASE WHEN substr(date, 4, 2) = '10' THEN hrs ELSE 0 END) AS 'Oct',
-              SUM(CASE WHEN substr(date, 4, 2) = '11' THEN hrs ELSE 0 END) AS 'Nov',
-              SUM(CASE WHEN substr(date, 4, 2) = '12' THEN hrs ELSE 0 END) AS 'Dec',
-              SUM(hrs) AS total
-          FROM record
-          LEFT JOIN vol on record.vol_id = vol.vol_id
-          WHERE date LIKE '?%' AND group_id = 'A1' 
-          GROUP BY vol_id`;
-          const val = [isOver, month];
-          const data = await db.query(sql, val);
-          return { data: data[0] };
+          if (!volId)  return { data: {} };
+          const data = await db.query('CALL yearsStats(?)', volId);
+          return { data: data[0][0]};
         } catch (e) {
           console.error(e);
           return e;

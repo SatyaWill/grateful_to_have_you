@@ -1,6 +1,6 @@
 {{css "/css/info.css,/css/audit.css,/css/stats.css"}}
 
-<div class="accordion-item hidden">
+<div class="accordion-item">
   <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" >
     <i class="bi bi-person-heart"></i>依志工統計
   </button>
@@ -8,21 +8,23 @@
     <div class="accordion-body" >
     <div class="input-group audit_selector">
       <input type="number" class="form-control" placeholder="志工編號" id="vol_id" name="vol_id"/>
-      <button class="btn btn-secondary" >查詢</button>
+      <button class="btn btn-secondary" id="yearStatsBtn">查詢</button>
     </div>
       <!-- 表格 -->
       <table id="volHours" class="table table-bordered table-striped nowrap dt-responsive collapsed table-hover custom-tb"
         role="grid"aria-controls="volHours" style="width: 100%" >
-        <thead class="bg-light bg-gradient">
+        <thead class="groupHoursTHd">
           <tr>
-            <th class="th-sm">操作</th>
+            <th class="th-sm"></th>
+            <th class="th-sm">姓名</th>
             <th class="th-sm">組別</th>
             <th class="th-sm">起日</th>
             <th class="th-sm">迄日</th>
             <th class="th-sm">年資</th>
             <th class="th-sm">時數</th>
-            <th class="th-sm">次數</th>
-            <th class="th-sm">年平均</th>
+            <th class="th-sm">天數</th>
+            <th class="th-sm">小時/年</th>
+            <th class="th-sm">天/年</th>
           </tr>
         </thead>
       </table>
@@ -33,7 +35,7 @@
   <button class="accordion-button" type="button"data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo"aria-expanded="true"
     aria-controls="panelsStayOpen-collapseTwo">
     <i class="bi bi-people-fill"></i>
-    依組別統計
+    依組別統計(時數)
   </button>
   <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
     <div class="infoDesc">

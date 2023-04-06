@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const moment = require("moment");
 const now = moment().utcOffset(480).format("YYYY-MM-DD HH:mm:ss").toString();
 
-console.log(now);
 module.exports = {
     login: async (id, password) => {
         try {
@@ -14,9 +13,7 @@ module.exports = {
             GROUP BY a.id`
             const data = await db.query(sql ,[id])
             const user = data[0][0]
-            if (!bcrypt.compareSync(password, user.password)) {
-                throw new Error('Invalid credentials')
-            }
+            if (!user || !bcrypt.compareSync(password, user.password)) return false
             return user
         }catch(e){
             console.error(e)
