@@ -16,8 +16,6 @@ The project facilitates volunteer and data management with Role-Based Access Con
 
 Table of Contents
 ---
-- [Grateful to have you](#grateful-to-have-you)
-  - [Table of Contents](#table-of-contents)
   - [Demo for Main Features](#demo-for-main-features)
   - [Technologies](#technologies)
     - [Backend](#backend)
@@ -74,7 +72,7 @@ Architecture
 - RDS MySQL: for storing application data
 - S3 / CloudFront: for storing and accelerating volunteer images
   
-![image](readme_pic/architecture.png)
+![image](readme_pic/Architecture.png)
 
 Database Schema
 ---
