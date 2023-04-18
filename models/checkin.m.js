@@ -22,8 +22,9 @@ module.exports = {
                 LEFT JOIN g ON g.vol_id = vol.vol_id
                 WHERE vol.vol_id = ?`
             const val = [id, today, id, id]
-            const data = await db.query(sql, val)
-            return {data : data[0]}
+            const res = await db.query(sql, val)
+            console.log(res[0]);
+            return {data: res[0]}
         }catch(err){
             console.error(err)
             return err
