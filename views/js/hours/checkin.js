@@ -29,8 +29,9 @@ i("check").addEventListener("click", async function(e){
         const resp = await hoursAPI.checkinType(volId)
         const d = await resp.data.data[0]
         if (resp.status === 200) {
-            if (!d) {
-                bodyModal(`<h5>查無編號 ${volId} 的資料</h5>`)
+            if (!d || d.group_list===null) {
+                const msg = !d ? `<h5>查無編號 ${volId} 的資料</h5>` : `<h5>編號 ${volId} 目前沒有加入的組別</h5>`
+                bodyModal(msg)
                 i('hintModal').addEventListener('hidden.bs.modal', e => {
                     i("vol_id").value = ""
                 })
